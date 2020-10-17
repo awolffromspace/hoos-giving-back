@@ -1,18 +1,12 @@
 from django.conf import settings
 from django.db import models
 
-
-class Donation(models.Model):
+class MoneyDonation(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
     date_donated = models.DateTimeField('date donated')
-
-    class Meta:
-        abstract = True
-
-class MoneyDonation(Donation):
     money_total = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
@@ -22,7 +16,12 @@ class MoneyDonation(Donation):
             self.date
         )
 
-class TimeDonation(Donation):
+class TimeDonation(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    date_donated = models.DateTimeField('date donated')
     time_total = models.DurationField()
 
     def __str__(self):
