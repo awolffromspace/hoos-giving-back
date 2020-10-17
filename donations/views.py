@@ -8,12 +8,12 @@ class IndexView(generic.ListView):
     template_name = 'donations/index.html'
     context_object_name = 'donation_list'
 
-    def get_queryset(self, request):
+    def get_queryset(self):
         time_donations = TimeDonation.objects.filter(
-            user=request.user
+            user=self.request.user
         )
         money_donations = MoneyDonation.objects.filter(
-            user=request.user
+            user=self.request.user
         )
         both_donations = money_donations | time_donations
         return both_donations.order_by('-date_donated')
