@@ -18,7 +18,6 @@ class IndexView(generic.ListView):
             user=self.request.user
         )
         both_donations = sorted(
-            chain(money_donations, time_donations),
-            key=attrgetter('date_donated')
+            chain(money_donations, time_donations)
         )
         return both_donations
