@@ -25,7 +25,7 @@ class TimeDonation(Donation):
     time_total = models.DurationField()
 
     def __str__(self):
-        return "{0} donated {1} time at {2}".format(
+        return "{0} volunteered {1} time at {2}".format(
             self.user.username,
             self.time_total,
             self.date_donated
