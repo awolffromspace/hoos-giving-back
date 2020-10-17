@@ -7,7 +7,7 @@ class IndexView(generic.ListView):
     context_object_name = 'donation_list'
 
     def get_queryset(self):
-    	time_donations = TimeDonation.objects.filter(
+        time_donations = TimeDonation.objects.filter(
             user=request.user
         )
         money_donations = MoneyDonation.objects.filter(
