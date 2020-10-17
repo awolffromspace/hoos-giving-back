@@ -1,19 +1,19 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
+from itertools import chain
 
 from .models import MoneyDonation, TimeDonation
 
 class IndexView(generic.ListView):
     template_name = 'donations/index.html'
-    context_object_name = 'donation_list'
 
-    def get_queryset(self):
-        time_donations = TimeDonation.objects.filter(
-            user=self.request.user
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['money_donations'] = MoneyDonation.objects.get(
+        	user=self.request.user
         )
-        money_donations = MoneyDonation.objects.filter(
-            user=self.request.user
+        context['time_donations'] = TimeDonation.objects.get(
+        	user=self.request.user
         )
-        both_donations = money_donations | time_donations
-        return both_donations.order_by('-date_donated')
+        return context
