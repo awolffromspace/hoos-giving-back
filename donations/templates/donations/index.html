@@ -1,13 +1,6 @@
-{% if money_donations %}
+{% if donation_list %}
     <ul>
-    {% for money_donation in money_donations %}
-        <li>{{ money_donation }}</li>
-    {% endfor %}
-    </ul>
-
-{% if time_donations %}
-    <ul>
-    {% for time_donation in time_donations %}
-        <li>{{ time_donation }}</li>
+    {% for donation in donation_list %}
+        <li>{{ donation }}</li>
     {% endfor %}
     </ul>
