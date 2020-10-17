@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 
@@ -7,7 +8,7 @@ class IndexView(generic.ListView):
     template_name = 'donations/index.html'
     context_object_name = 'donation_list'
 
-    def get_queryset(self):
+    def get_queryset(self, request):
         time_donations = TimeDonation.objects.filter(
             user=request.user
         )
