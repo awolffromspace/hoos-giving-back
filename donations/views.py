@@ -23,7 +23,8 @@ class IndexView(generic.ListView):
         )
         both_donations = sorted(
             chain(money_donations, time_donations),
-            key=attrgetter('date_donated')
+            key=attrgetter('date_donated'),
+            reverse = True
         )
         return both_donations
 
