@@ -12,7 +12,7 @@ class Donation(models.Model):
     class Meta:
         abstract = True
 
-class MoneyDonation(models.Model):
+class MoneyDonation(Donation):
     money_total = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
@@ -22,7 +22,7 @@ class MoneyDonation(models.Model):
             self.date
         )
 
-class TimeDonation(models.Model):
+class TimeDonation(Donation):
     time_total = models.DurationField()
 
     def __str__(self):
