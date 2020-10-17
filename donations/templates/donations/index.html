@@ -1,0 +1,9 @@
+{% if donation_list %}
+    <ul>
+    {% for donation in donation_list %}
+        <li>{{ donation }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>You haven't donated or volunteered.</p>
+{% endif %}
