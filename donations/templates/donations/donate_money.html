@@ -1,0 +1,6 @@
+<h1>Donate money</h1>
+<form action="/donations/donate_money/" method="post">
+	{% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
