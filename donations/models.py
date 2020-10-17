@@ -13,7 +13,7 @@ class MoneyDonation(models.Model):
         return "{0} donated ${1} at {2}".format(
             self.user.username,
             self.money_total,
-            self.date
+            self.date_donated
         )
 
 class TimeDonation(models.Model):
@@ -28,5 +28,5 @@ class TimeDonation(models.Model):
         return "{0} donated ${1} at {2}".format(
             self.user.username,
             self.time_total,
-            self.date
+            self.date_donated
         )
