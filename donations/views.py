@@ -7,7 +7,7 @@ from django.views import generic
 from itertools import chain
 from operator import attrgetter
 
-from .forms import MoneyDonationForm
+from .forms import MoneyDonationForm, TimeDonationForm
 from .models import MoneyDonation, TimeDonation
 
 class IndexView(generic.ListView):
@@ -27,7 +27,7 @@ class IndexView(generic.ListView):
         )
         return both_donations
 
-def donate_money(request):
+def donate(request):
     if request.method == 'POST':
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
@@ -36,4 +36,15 @@ def donate_money(request):
             return HttpResponseRedirect('/donations/')
     else:
         form = MoneyDonationForm()
-    return render(request, 'donations/donate_money.html', {'form': form})
+    return render(request, 'donations/donate.html', {'form': form})
+
+def volunteer(request):
+    if request.method == 'POST':
+        form = TimeDonationForm(request.POST)
+        if form.is_valid():
+            time_donation = TimeDonation(user=request.user, date_donated=timezone.now(), time_total=form.cleaned_data['time_total'])
+            time_donation.save()
+            return HttpResponseRedirect('/donations/')
+    else:
+        form = TimeDonationForm()
+    return render(request, 'donations/volunteer.html', {'form': form})

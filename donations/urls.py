@@ -5,5 +5,6 @@ from . import views
 app_name = 'donations'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path('donate_money/', views.donate_money, name='donate_money'),
+    path('donate/', views.donate, name='donate'),
+    path('volunteer/', views.volunteer, name='volunteer'),
 ]
