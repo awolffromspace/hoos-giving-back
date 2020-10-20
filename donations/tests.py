@@ -1,11 +1,9 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from .models import MoneyDonation, TimeDonation
+from .forms import MoneyDonationForm, TimeDonationForm
 
-class MoneyDonationModelTests(TestCase):
-	def setUp(self):
-		self.user = User.objects.create_user('Test User', 'test@email.com', 'testpswd')
-
-	def tearDown(self):
-		self.user.delete()
+class MoneyDonationFormTests(TestCase):
+	def test_equivalence(self):
+		form = MoneyDonationForm(data={'money_total': 2})
+		self.assertTrue(form.is_valid())
