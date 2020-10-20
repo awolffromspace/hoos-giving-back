@@ -12,7 +12,7 @@ class Donation(models.Model):
         abstract = True
 
 class MoneyDonation(Donation):
-    money_total = models.DecimalField(max_digits=8, decimal_places=2, min_value=0.01)
+    money_total = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
         return "{0} donated ${1} at {2}".format(
@@ -22,7 +22,7 @@ class MoneyDonation(Donation):
         )
 
 class TimeDonation(Donation):
-    time_total = models.DurationField(min_value=1)
+    time_total = models.DurationField()
 
     def __str__(self):
         return "{0} volunteered {1} time at {2}".format(
