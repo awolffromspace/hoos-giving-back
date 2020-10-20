@@ -34,7 +34,7 @@ def donate(request):
     if request.method == 'POST':
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
-            money_donation = MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=form.cleaned_data['money_total'], min_value=0.01)
+            money_donation = MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=form.cleaned_data['money_total'])
             money_donation.save()
             return HttpResponseRedirect('/donations/')
     else:
@@ -45,7 +45,7 @@ def volunteer(request):
     if request.method == 'POST':
         form = TimeDonationForm(request.POST)
         if form.is_valid():
-            time_donation = TimeDonation(user=request.user, date_donated=timezone.now(), time_total=form.cleaned_data['time_total'], min_value=1)
+            time_donation = TimeDonation(user=request.user, date_donated=timezone.now(), time_total=form.cleaned_data['time_total'])
             time_donation.save()
             return HttpResponseRedirect('/donations/')
     else:
