@@ -1,11 +1,15 @@
 <h1>Feed</h1>
 <a href="..">Home</a> • <a href="donate">Donate</a> • <a href="volunteer">Volunteer</a>
-{% if donation_list %}
-    <ul>
-    {% for donation in donation_list %}
-        <li>{{ donation }}</li>
-    {% endfor %}
-    </ul>
+{% if user.is_authenticated %}
+    {% if donation_list %}
+        <ul>
+        {% for donation in donation_list %}
+            <li>{{ donation }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't donated or volunteered.</p>
+    {% endif %}
 {% else %}
-    <p>You haven't donated or volunteered.</p>
+    <p>You aren't logged in.</p>
 {% endif %}
