@@ -1,5 +1,5 @@
 <h1>Donate</h1>
-<a href="../..">Home</a> • <a href="..">Feed</a> • <a href="../volunteer">Volunteer</a><br>
+<p><a href="../..">Home</a> • <a href="..">Feed</a> • <a href="../volunteer">Volunteer</a></p>
 {% if user.is_authenticated %}
     <form action="/donations/donate/" method="post">
         {% csrf_token %}
