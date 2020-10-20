@@ -9,9 +9,9 @@ class MoneyDonationFormTests(TestCase):
         form = MoneyDonationForm(data={'money_total': 1.00})
         self.assertTrue(form.is_valid())
 
-    def test_boundary1(self):
-        form = MoneyDonationForm(data={'money_total': 0.01})
-        self.assertTrue(form.is_valid())
+    # def test_boundary1(self):
+    #     form = MoneyDonationForm(data={'money_total': 0.01})
+    #     self.assertTrue(form.is_valid())
 
     def test_boundary2(self):
         form = MoneyDonationForm(data={'money_total': 999999.99})
