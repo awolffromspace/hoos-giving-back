@@ -15,7 +15,7 @@ class IndexView(generic.ListView):
     context_object_name = 'donation_list'
 
     def get_queryset(self):
-        all_donations = Model.objects.none()
+        all_donations = MoneyDonation.objects.none()
         if self.request.user.is_authenticated:
             money_donations = MoneyDonation.objects.filter(
                 user=self.request.user
