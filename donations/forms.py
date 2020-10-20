@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django import forms
 
 class MoneyDonationForm(forms.Form):
@@ -5,3 +6,9 @@ class MoneyDonationForm(forms.Form):
 
 class TimeDonationForm(forms.Form):
     time_total = forms.DurationField(label='Time Total (s)')
+
+    def clean_time_total(self):
+    	data = self.cleaned_data['time_total']
+    	if data <= datetime.timedelta(0):
+    		raise ValidationError("Your volunteer time must be positive")
+    	return data
