@@ -18,14 +18,17 @@ class MoneyDonationFormTests(TestCase):
         form = MoneyDonationForm(data={'money_total': Decimal('999999.99')})
         self.assertTrue(form.is_valid())
 
-    # TODO: Figure out how to perform exception tests on forms
-    # def test_exception1(self):
-    #     form = MoneyDonationForm(data={'money_total': 0.00})
-    #     self.assertFalse(form.is_valid())
+    def test_exception1(self):
+        form = MoneyDonationForm(data={'money_total': Decimal('0.00')})
+        self.assertEqual(
+            form.errors['money_total'], ['Please select a value that is no less than 0.01.']
+        )
 
-    # def test_exception2(self):
-    #     form = MoneyDonationForm(data={'money_total': 1000000.00})
-    #     self.assertFalse(form.is_valid())
+    def test_exception2(self):
+        form = MoneyDonationForm(data={'money_total': Decimal('1000000.00')})
+        self.assertEqual(
+            form.errors['money_total'], ['Ensure that there are no more than 8 digits total.']
+        )
 
 class TimeDonationFormTests(TestCase):
     def test_equivalence(self):
@@ -40,6 +43,8 @@ class TimeDonationFormTests(TestCase):
         form = TimeDonationForm(data={'time_total': timedelta.max})
         self.assertTrue(form.is_valid())
 
-    # def test_exception(self):
-    #     form = TimeDonationForm(data={'time_total': timedelta(seconds=-1)})
-    #     self.assertFalse(form.is_valid())
+    def test_exception(self):
+        form = TimeDonationForm(data={'time_total': timedelta(seconds=-1)})
+        self.assertEqual(
+            form.errors['time_total'], ['Please select a positive value.']
+        )
