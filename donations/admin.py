@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import MoneyDonation, TimeDonation
+
+admin.site.register(MoneyDonation)
+admin.site.register(TimeDonation)
