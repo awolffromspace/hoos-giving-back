@@ -1,4 +1,5 @@
 from datetime import timedelta
+from decimal import *
 from django.contrib.auth.models import User
 from django.test import TestCase
 
@@ -6,15 +7,15 @@ from .forms import MoneyDonationForm, TimeDonationForm
 
 class MoneyDonationFormTests(TestCase):
     def test_equivalence(self):
-        form = MoneyDonationForm(data={'money_total': 1.00})
+        form = MoneyDonationForm(data={'money_total': Decimal('1.00')})
         self.assertTrue(form.is_valid())
 
-    # def test_boundary1(self):
-    #     form = MoneyDonationForm(data={'money_total': 0.01})
-    #     self.assertTrue(form.is_valid())
+    def test_boundary1(self):
+        form = MoneyDonationForm(data={'money_total': Decimal('0.01')})
+        self.assertTrue(form.is_valid())
 
     def test_boundary2(self):
-        form = MoneyDonationForm(data={'money_total': 999999.99})
+        form = MoneyDonationForm(data={'money_total': Decimal('999999.99')})
         self.assertTrue(form.is_valid())
 
     # TODO: Figure out how to perform exception tests on forms
