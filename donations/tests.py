@@ -21,13 +21,13 @@ class MoneyDonationFormTests(TestCase):
     def test_exception1(self):
         form = MoneyDonationForm(data={'money_total': Decimal('0.00')})
         self.assertEqual(
-            form.errors['money_total'], ['Please select a value that is no less than 0.01.']
+            form.errors['money_total'], ['Ensure this value is greater than or equal to 0.01.']
         )
 
     def test_exception2(self):
         form = MoneyDonationForm(data={'money_total': Decimal('1000000.00')})
         self.assertEqual(
-            form.errors['money_total'], ['Ensure that there are no more than 8 digits total.']
+            form.errors['money_total'], ['Ensure this value is greater than or equal to 0.01.']
         )
 
 class TimeDonationFormTests(TestCase):
@@ -46,5 +46,5 @@ class TimeDonationFormTests(TestCase):
     def test_exception(self):
         form = TimeDonationForm(data={'time_total': timedelta(seconds=-1)})
         self.assertEqual(
-            form.errors['time_total'], ['Please select a positive value.']
+            form.errors['time_total'], ['Ensure this value is greater than or equal to 1.']
         )
