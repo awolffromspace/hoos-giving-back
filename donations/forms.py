@@ -12,5 +12,5 @@ class TimeDonationForm(forms.Form):
     def clean_time_total(self):
         data = self.cleaned_data['time_total']
         if data <= timedelta(0):
-            raise ValidationError("Your volunteer time must be positive")
+            raise ValidationError("Ensure this value is positive.")
         return data
