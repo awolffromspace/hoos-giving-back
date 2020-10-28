@@ -29,11 +29,7 @@ class MoneyDonationFormTests(TestCase):
         self.assertEqual(
             form.errors['money_total'], ['Ensure that there are no more than 8 digits in total.']
         )
-    def test_exception3(self):
-        form = MoneyDonationForm(data={'money_total': Decimal('-10.0')})
-        self.assertEqual(
-            form.errors['money_total'], ['Ensure no negative values work.']
-        )
+  
 
 class TimeDonationFormTests(TestCase):
     def test_equivalence(self):
