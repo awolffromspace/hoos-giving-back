@@ -32,9 +32,9 @@ class TimeDonation(Donation):
         )
 
 class MoneySplit(models.Model):
-    money_donation = models.ForeignKey(MoneyDonation, related_name="splits")
+    money_donation = models.ForeignKey(MoneyDonation, on_delete=models.CASCADE, related_name="splits")
     money_split = models.DecimalField()
 
 class TimeSplit(models.Model):
-    time_donation = models.ForeignKey(TimeDonation, related_name="splits")
+    time_donation = models.ForeignKey(TimeDonation, on_delete=models.CASCADE, related_name="splits")
     time_split = models.DecimalField()
