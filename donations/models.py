@@ -30,3 +30,11 @@ class TimeDonation(Donation):
             self.time_total,
             self.date_donated
         )
+
+class MoneySplit(models.Model):
+    money_donation = models.ForeignKey(MoneyDonation, related_name="splits")
+    money_split = models.DecimalField()
+
+class TimeSplit(models.Model):
+    time_donation = models.ForeignKey(TimeDonation, related_name="splits")
+    time_split = models.DecimalField()

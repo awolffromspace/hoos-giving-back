@@ -34,8 +34,19 @@ def donate(request):
     if request.method == 'POST':
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
-            money_donation = MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=form.cleaned_data['money_total'])
-            money_donation.save()
+            donation = MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=form.cleaned_data['money_total'])
+            splits_string = form.cleaned_data['money_splits']
+            splits = splitsString.split(",")
+            sum = 0
+            for i in range(len(splits)):
+                sum += splits[i]
+            if sum < 0.99 or sum > 1.0:
+                return render(request, 'donations/donate.html', {'form': form})
+            donation.save()
+            margin = (1.0 - sum) / range(len(splits))
+            for i in range(len(splits)):
+                split = splits[i] + margin
+                MoneySplit(money_donation=money_donation, money_split=split).save()
             return HttpResponseRedirect('/donations/')
     else:
         form = MoneyDonationForm()
