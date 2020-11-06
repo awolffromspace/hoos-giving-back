@@ -4,3 +4,5 @@ from .models import MoneyDonation, TimeDonation
 
 admin.site.register(MoneyDonation)
 admin.site.register(TimeDonation)
+admin.site.register(MoneySplit)
+admin.site.register(TimeSplit)
