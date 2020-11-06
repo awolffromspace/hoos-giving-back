@@ -1,5 +1,7 @@
-<h1>Donate</h1>
-<p><a href="../..">Home</a> • <a href="..">Feed</a> • <a href="../volunteer">Volunteer</a></p>
+{% extends 'donations/base.html' %}
+{% block content %}
+
+
 {% if user.is_authenticated %}
     <form action="/donations/donate/" method="post">
         {% csrf_token %}
@@ -211,3 +213,6 @@ document.addEventListener("click", closeAllSelect);
 {% else %}
     <p>You aren't logged in.</p>
 {% endif %}
+
+
+{% endblock%}

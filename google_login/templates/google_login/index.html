@@ -1,23 +1,18 @@
+{% extends 'google_login/base.html' %}
 {% load socialaccount %}
-<html lang="en">
-<head>
-    <title>My HTML Document</title>
-    <style>
-        body { background: rgb(238,174,202);
-        background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);}
-        p { color: #fff; }
-    </style>
-</head>
+
+{% block content %}
+
 <body>
-    <h1 style='color:#000080'><center>Hoo's Giving Back?</center></h1>
-    <p><center><a href="donations"><font color="#000080">Feed</font></a> • <a href="donations/donate"><font color="#000080">Donate</font></a> • <a href="donations/volunteer"><font color="#000080">Volunteer</font></a></center></p>
     {% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}!</p>
+    <center style = "font-family: Helvetica; font-style: normal; font-weight: bold; color: #565554">hi {{ user.username }}!</center>
     {% else %}
-    <div style="border:3px double pink;padding:25%;color:#000080">
-    <center>LOGIN WITH GOOGLE ACCOUNT</center>
-    <a href="{% provider_login_url 'google' %}"><center>Click Here</center></a>
+    <div style="padding:25%;">
+    <center style = "font-family: Helvetica; font-style: normal; font-weight: bold; color: #565554">login to explore how to help your cville community 😊</center>
+    <a href="{% provider_login_url 'google' %}" action = reauthenticate, style = "font-family: Helvetica; font-style: normal; font-weight: bold;"><center>click here</center></a>
     </div>
     {% endif %}
     </body>
 </html>
+
+{% endblock%}

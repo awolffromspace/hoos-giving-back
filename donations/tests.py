@@ -32,6 +32,7 @@ class MoneyDonationFormTests(TestCase):
         )
   
 
+
 class TimeDonationFormTests(TestCase):
     def test_equivalence(self):
         form = TimeDonationForm(data={'time_total': timedelta(hours=1), 'time_splits': '1.0', 'tasks': 'task'})
