@@ -39,7 +39,7 @@ def donate(request):
             splits = splits_string.split(",")
             sum = 0
             for i in range(len(splits)):
-                sum += splits[i]
+                sum += float(splits[i])
             if sum < 0.99 or sum > 1.0:
                 return render(request, 'donations/donate.html', {'form': form})
             donation.save()
