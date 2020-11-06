@@ -23,11 +23,7 @@ class IndexView(generic.ListView):
             time_donations = TimeSplit.objects.filter(
                 time_donation__user=self.request.user
             )
-            all_donations = sorted(
-                chain(money_donations, time_donations)
-                #key=attrgetter('date_donated'),
-                #reverse = True
-            )
+            all_donations = chain(money_donations, time_donations)
         return all_donations
 
 def processSplits(splits_str):
