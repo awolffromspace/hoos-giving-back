@@ -15,13 +15,13 @@ class IndexView(generic.ListView):
     context_object_name = 'donation_list'
 
     def get_queryset(self):
-        all_donations = MoneyDonation.objects.none()
+        all_donations = MoneySplit.objects.none()
         if self.request.user.is_authenticated:
-            money_donations = MoneyDonation.objects.filter(
-                user=self.request.user
+            money_donations = MoneySplit.objects.filter(
+                money_donation__user=self.request.user
             )
-            time_donations = TimeDonation.objects.filter(
-                user=self.request.user
+            time_donations = TimeSplit.objects.filter(
+                time_donation__user=self.request.user
             )
             all_donations = sorted(
                 chain(money_donations, time_donations),
