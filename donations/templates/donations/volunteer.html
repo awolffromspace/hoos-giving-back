@@ -1,5 +1,6 @@
-<h1>Volunteer</h1>
-<p><a href="../..">Home</a> • <a href="..">Feed</a> • <a href="../donate">Donate</a></p>
+{% extends 'donations/base.html' %}
+{% block content %}
+
 {% if user.is_authenticated %}
     <form action="/donations/volunteer/" method="post">
         {% csrf_token %}
@@ -9,3 +10,5 @@
 {% else %}
     <p>You aren't logged in.</p>
 {% endif %}
+
+{% endblock%}

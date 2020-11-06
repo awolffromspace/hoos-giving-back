@@ -1,5 +1,6 @@
-<h1>Feed</h1>
-<a href="..">Home</a> • <a href="donate">Donate</a> • <a href="volunteer">Volunteer</a>
+{% extends 'donations/base.html' %}
+{% block content %}
+
 {% if user.is_authenticated %}
     {% if donation_list %}
         <ul>
@@ -8,8 +9,10 @@
         {% endfor %}
         </ul>
     {% else %}
-        <p>You haven't donated or volunteered.</p>
+        <center style = "font-family: Helvetica; font-style: normal; font-weight: bold; color: #565554; margin-top: 250px">you haven't donated or volunteered yet! explore our nonprofits to get started</center>
     {% endif %}
 {% else %}
     <p>You aren't logged in.</p>
 {% endif %}
+
+{% endblock%}
