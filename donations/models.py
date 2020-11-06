@@ -33,8 +33,8 @@ class TimeDonation(Donation):
 
 class MoneySplit(models.Model):
     money_donation = models.ForeignKey(MoneyDonation, on_delete=models.CASCADE)
-    money_split = models.DecimalField(max_digits=8, decimal_places=6)
+    money_split = models.DecimalField(max_digits=5, decimal_places=4)
 
 class TimeSplit(models.Model):
     time_donation = models.ForeignKey(TimeDonation, on_delete=models.CASCADE)
-    time_split = models.DecimalField(max_digits=8, decimal_places=6)
+    time_split = models.DecimalField(max_digits=5, decimal_places=4)

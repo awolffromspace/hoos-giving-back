@@ -30,23 +30,33 @@ class IndexView(generic.ListView):
             )
         return all_donations
 
+def processSplits(splits_str):
+    splits_strlst = splits_str.split(",")
+    sum = 0
+    splits = []
+    for i in range(len(splits_strlst)):
+        splits.append(float(splits_strlst[i]))
+        sum += splits[i]
+    if sum < 0.99 or sum > 1.0:
+        return [-1]
+    margin = (1.0 - sum) / len(splits)
+    for i in range(len(splits)):
+        splits[i] += margin
+    return splits
+
 def donate(request):
     if request.method == 'POST':
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
             donation = MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=form.cleaned_data['money_total'])
-            splits_string = form.cleaned_data['money_splits']
-            splits = splits_string.split(",")
-            sum = 0
-            for i in range(len(splits)):
-                sum += float(splits[i])
-            if sum < 0.99 or sum > 1.0:
-                return render(request, 'donations/donate.html', {'form': form})
-            donation.save()
-            margin = (1.0 - sum) / len(splits)
-            for i in range(len(splits)):
-                split = float(splits[i]) + margin
-                MoneySplit(money_donation=donation, money_split=split).save()
+            splits = processSplits(form.cleaned_data['money_splits'])
+            if splits[0] > -1:
+                donation.save()
+                for i in range(len(splits)):
+                    MoneySplit(money_donation=donation, money_split=split[i]).save()
+            else:
+                form = MoneyDonationForm()
+                render(request, 'donations/donate.html', {'form': form})
             return HttpResponseRedirect('/donations/')
     else:
         form = MoneyDonationForm()
@@ -56,8 +66,15 @@ def volunteer(request):
     if request.method == 'POST':
         form = TimeDonationForm(request.POST)
         if form.is_valid():
-            time_donation = TimeDonation(user=request.user, date_donated=timezone.now(), time_total=form.cleaned_data['time_total'])
-            time_donation.save()
+            volunteer = TimeDonation(user=request.user, date_donated=timezone.now(), time_total=form.cleaned_data['time_total'])
+            splits = processSplits(form.cleaned_data['time_splits'])
+            if splits[0] > -1:
+                donation.save()
+                for i in range(len(splits)):
+                    TimeSplit(time_donation=volunteer, time_split=split[i]).save()
+            else:
+                form = TimeDonationForm()
+                render(request, 'donations/volunteer.html', {'form': form})
             return HttpResponseRedirect('/donations/')
     else:
         form = TimeDonationForm()
