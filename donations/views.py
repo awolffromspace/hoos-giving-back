@@ -46,7 +46,7 @@ def donate(request):
             margin = (1.0 - sum) / len(splits)
             for i in range(len(splits)):
                 split = float(splits[i]) + margin
-                MoneySplit(money_donation=money_donation, money_split=split).save()
+                MoneySplit(money_donation=donation, money_split=split).save()
             return HttpResponseRedirect('/donations/')
     else:
         form = MoneyDonationForm()
