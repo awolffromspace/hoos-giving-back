@@ -69,7 +69,7 @@ def volunteer(request):
             volunteer = TimeDonation(user=request.user, date_donated=timezone.now(), time_total=form.cleaned_data['time_total'])
             splits = processSplits(form.cleaned_data['time_splits'])
             if splits[0] > -1:
-                donation.save()
+                volunteer.save()
                 for i in range(len(splits)):
                     TimeSplit(time_donation=volunteer, time_split=split[i]).save()
             else:

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 
 from .forms import MoneyDonationForm, TimeDonationForm
+from . import views
 
 class MoneyDonationFormTests(TestCase):
     def test_equivalence(self):
@@ -49,3 +50,7 @@ class TimeDonationFormTests(TestCase):
         self.assertEqual(
             form.errors['time_total'], ['Ensure this value is positive.']
         )
+
+class ProcessSplitsTests(TestCase):
+    def test_equivalence():
+        assertTrue(processSplits('0.50,0.50'))
