@@ -53,7 +53,7 @@ def donate(request):
             if splits[0] > -1:
                 donation.save()
                 for i in range(len(splits)):
-                    MoneySplit(money_donation=donation, money_split=split[i]).save()
+                    MoneySplit(money_donation=donation, money_split=splits[i]).save()
             else:
                 form = MoneyDonationForm()
                 render(request, 'donations/donate.html', {'form': form})
