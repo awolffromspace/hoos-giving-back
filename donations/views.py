@@ -21,6 +21,7 @@ class IndexView(generic.ListView):
                 money_donation__user=self.request.user
             )
             money_donations = sorted(
+                money_donations,
                 key=attrgetter('money_donation__date_donated'),
                 reverse=True
             )
@@ -28,6 +29,7 @@ class IndexView(generic.ListView):
                 time_donation__user=self.request.user
             )
             time_donations = sorted(
+                time_donations,
                 key=attrgetter('time_donation__date_donated'),
                 reverse=True
             )
