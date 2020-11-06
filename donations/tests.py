@@ -96,3 +96,7 @@ class ProcessSplitsTests(TestCase):
     def test_exception4(self):
         splits = views.processSplits('1.01')
         self.assertTrue(splits[0] == -1)
+
+    def test_exception5(self):
+        splits = views.processSplits('text')
+        self.assertTrue(splits[0] == -1)
