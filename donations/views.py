@@ -8,7 +8,7 @@ from itertools import chain
 from operator import attrgetter
 
 from .forms import MoneyDonationForm, TimeDonationForm
-from .models import MoneyDonation, TimeDonation
+from .models import MoneyDonation, TimeDonation, MoneySplit, TimeSplit
 
 class IndexView(generic.ListView):
     template_name = 'donations/index.html'
