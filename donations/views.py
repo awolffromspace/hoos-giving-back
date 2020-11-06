@@ -36,7 +36,7 @@ def donate(request):
         if form.is_valid():
             donation = MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=form.cleaned_data['money_total'])
             splits_string = form.cleaned_data['money_splits']
-            splits = splitsString.split(",")
+            splits = splits_string.split(",")
             sum = 0
             for i in range(len(splits)):
                 sum += splits[i]
