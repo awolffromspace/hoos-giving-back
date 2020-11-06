@@ -20,8 +20,16 @@ class IndexView(generic.ListView):
             money_donations = MoneySplit.objects.filter(
                 money_donation__user=self.request.user
             )
+            money_donations = sorted(
+                key=attrgetter('money_donation__date_donated'),
+                reverse=True
+            )
             time_donations = TimeSplit.objects.filter(
                 time_donation__user=self.request.user
+            )
+            time_donations = sorted(
+                key=attrgetter('time_donation__date_donated'),
+                reverse=True
             )
             all_donations = chain(money_donations, time_donations)
         return all_donations
