@@ -43,9 +43,9 @@ def donate(request):
             if sum < 0.99 or sum > 1.0:
                 return render(request, 'donations/donate.html', {'form': form})
             donation.save()
-            margin = (1.0 - sum) / range(len(splits))
+            margin = (1.0 - sum) / len(splits)
             for i in range(len(splits)):
-                split = splits[i] + margin
+                split = float(splits[i]) + margin
                 MoneySplit(money_donation=money_donation, money_split=split).save()
             return HttpResponseRedirect('/donations/')
     else:
