@@ -53,46 +53,46 @@ class TimeDonationFormTests(TestCase):
 
 class ProcessSplitsTests(TestCase):
     def test_equivalence1(self):
-        splits = processSplits('0.50,0.50')
+        splits = views.processSplits('0.50,0.50')
         for i in splits:
             self.assertFalse(i > 0.50 or i < 0.50)
 
     def test_equivalence2(self):
-        splits = processSplits('0.49,0.50')
+        splits = views.processSplits('0.49,0.50')
         self.assertFalse(splits[0] > 0.495 or splits[0] < 0.495)
         self.assertFalse(splits[1] > 0.505 or splits[1] < 0.505)
 
     def test_equivalence3(self):
-        splits = processSplits('0.33,0.33,0.33')
+        splits = views.processSplits('0.33,0.33,0.33')
         for i in splits:
-            self.assertFalse(i > 0.3334 or i < 0.3334)
+            self.assertFalse(i > 0.3335 or i < 0.33)
 
     def test_boundary1(self):
-        splits = processSplits('0.0,0.99')
-        self.assertFalse(splits[0] > 0.5 or splits[0] < 0.5)
+        splits = views.processSplits('0.0,0.99')
+        self.assertFalse(splits[0] > 0.0051 or splits[0] < 0.005)
         self.assertFalse(splits[1] > 0.995 or splits[1] < 0.995)
 
     def test_boundary2(self):
-        splits = processSplits('0.01,0.98')
+        splits = views.processSplits('0.01,0.98')
         self.assertFalse(splits[0] > 0.015 or splits[0] < 0.015)
         self.assertFalse(splits[1] > 0.985 or splits[1] < 0.985)
 
     def test_boundary2(self):
-        splits = processSplits('0.99')
+        splits = views.processSplits('0.99')
         self.assertFalse(splits[0] > 1.00 or splits[0] < 1.00)
 
     def test_exception1(self):
-        splits = processSplits('0.49,0.49')
+        splits = views.processSplits('0.49,0.49')
         self.assertTrue(splits[0] == -1)
 
     def test_exception2(self):
-        splits = processSplits('0.0,0.98')
+        splits = views.processSplits('0.0,0.98')
         self.assertTrue(splits[0] == -1)
 
     def test_exception3(self):
-        splits = processSplits('0.0')
+        splits = views.processSplits('0.0')
         self.assertTrue(splits[0] == -1)
 
     def test_exception4(self):
-        splits = processSplits('1.01')
+        splits = views.processSplits('1.01')
         self.assertTrue(splits[0] == -1)

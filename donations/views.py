@@ -53,7 +53,8 @@ def donate(request):
             if splits[0] > -1:
                 donation.save()
                 for i in range(len(splits)):
-                    MoneySplit(money_donation=donation, money_split=splits[i]).save()
+                    split = round(splits[i], 4)
+                    MoneySplit(money_donation=donation, money_split=split).save()
             else:
                 form = MoneyDonationForm()
                 render(request, 'donations/donate.html', {'form': form})
@@ -71,7 +72,8 @@ def volunteer(request):
             if splits[0] > -1:
                 volunteer.save()
                 for i in range(len(splits)):
-                    TimeSplit(time_donation=volunteer, time_split=split[i]).save()
+                    split = round(splits[i], 4)
+                    TimeSplit(time_donation=volunteer, time_split=split).save()
             else:
                 form = TimeDonationForm()
                 render(request, 'donations/volunteer.html', {'form': form})
