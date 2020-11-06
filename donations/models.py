@@ -34,7 +34,7 @@ class TimeDonation(Donation):
 class MoneySplit(models.Model):
     money_donation = models.ForeignKey(MoneyDonation, on_delete=models.CASCADE)
     money_split = models.DecimalField(max_digits=5, decimal_places=4)
-    charity = models.CharField(max_length=200)
+    charity = models.CharField(max_length=200, default='')
 
     def __str__(self):
         return "{0} donated ${1} at {2}".format(
@@ -46,7 +46,7 @@ class MoneySplit(models.Model):
 class TimeSplit(models.Model):
     time_donation = models.ForeignKey(TimeDonation, on_delete=models.CASCADE)
     time_split = models.DecimalField(max_digits=5, decimal_places=4)
-    task = models.CharField(max_length=200)
+    task = models.CharField(max_length=200, default='')
 
     def __str__(self):
         return "{0} volunteered {1} at {2}".format(
