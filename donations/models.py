@@ -39,7 +39,7 @@ class MoneySplit(models.Model):
     def __str__(self):
         return "{0} donated ${1} at {2}".format(
             self.money_donation.user.username,
-            self.money_donation.money_total * float(self.money_split),
+            self.money_donation.money_total * self.money_split,
             self.money_donation.date_donated
         )
 
