@@ -24,9 +24,9 @@ class IndexView(generic.ListView):
                 time_donation__user=self.request.user
             )
             all_donations = sorted(
-                chain(money_donations, time_donations),
-                key=attrgetter('date_donated'),
-                reverse = True
+                chain(money_donations, time_donations)
+                #key=attrgetter('date_donated'),
+                #reverse = True
             )
         return all_donations
 
