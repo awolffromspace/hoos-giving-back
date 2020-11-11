@@ -12,6 +12,12 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$( function() {
+  $( "#slider" ).slider();
+} );
+</script>
 <style>
 /*the container must be positioned relative:*/
 .custom-select {
@@ -195,6 +201,8 @@ function closeAllSelect(elmnt) {
 then close all select boxes:*/
 document.addEventListener("click", closeAllSelect);
 </script>
+
+<div id="slider"></div>
 
 </body>
     <h3>The Trevor Project</h3>
