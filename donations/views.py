@@ -55,12 +55,11 @@ def donate(request):
             donation = MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=form.cleaned_data['money_total'])
             splits = processSplits(form.cleaned_data['money_splits'])
             charities = form.cleaned_data['charities']
-            charities_lst = charities.split(',')
-            if splits[0] > -1 and len(splits) == len(charities_lst):
+            if splits[0] > -1 and len(splits) == len(charities):
                 donation.save()
                 for i in range(len(splits)):
                     split = round(splits[i], 4)
-                    MoneySplit(money_donation=donation, money_split=split, charity=charities_lst[i]).save()
+                    MoneySplit(money_donation=donation, money_split=split, charity=charities[i]).save()
             else:
                 form = MoneyDonationForm()
                 render(request, 'donations/donate.html', {'form': form})
