@@ -45,24 +45,18 @@ sliders.each(function() {
         step: 2,
         animate: 0,
         slide: function(event, ui) {
-            
-            // Update display to current value
             $(this).siblings('.value').text(ui.value);
 
-            // Get current total
             var total = 0;
 
             sliders.not(this).each(function() {
                 total += $(this).slider("option", "value");
             });
 
-            // Need to do this because apparently jQ UI
-            // does not update value until this event completes
             total += ui.value;
 
             var delta = availableTotal - total;
-            
-            // Update each slider
+
             sliders.not(this).each(function() {
                 var t = $(this),
                     value = t.slider("option", "value");
