@@ -35,6 +35,56 @@
   <p>According to charity: water, one in 10 people don’t have access to clean drinking water. The organization hopes to change these stats by bringing clean and safe drinking water to developing countries. It has already funded over 29,000 water projects around the world.</p>
   <h3>Mental Health America</h3>
   <p>Founded in 1909, Mental Health America helps Americans understand, prevent, and treat mental health issues that can interfere with their overall wellness and ability to live a healthy life. They also focus on educating Americans about mental health issues through their online hub of information and tools.</p>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+var sliders = $("#sliders .slider");
+var availableTotal = 100;
+
+sliders.each(function() {
+    var init_value = parseInt($(this).text());
+
+    $(this).siblings('.value').text(init_value);
+
+    $(this).empty().slider({
+        value: init_value,
+        min: 0,
+        max: availableTotal,
+        range: "max",
+        step: 2,
+        animate: 0,
+        slide: function(event, ui) {
+            $(this).siblings('.value').text(ui.value);
+
+            var total = 0;
+
+            sliders.not(this).each(function() {
+                total += $(this).slider("option", "value");
+            });
+
+            total += ui.value;
+
+            var delta = availableTotal - total;
+
+            sliders.not(this).each(function() {
+                var t = $(this),
+                    value = t.slider("option", "value");
+
+                var new_value = value + (delta/2);
+                
+                if (new_value < 0 || ui.value == 100) 
+                    new_value = 0;
+                if (new_value > 100) 
+                    new_value = 100;
+
+                t.siblings('.value').text(new_value);
+                t.slider('value', new_value);
+            });
+        }
+    });
+});
+  </script>
 {% else %}
   <p>You aren't logged in.</p>
 {% endif %}
