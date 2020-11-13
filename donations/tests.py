@@ -8,25 +8,25 @@ from . import views
 
 class MoneyDonationFormTests(TestCase):
     def test_equivalence(self):
-        form = MoneyDonationForm(data={'money_total': Decimal('1.00'), 'money_splits': '1.0', 'charities': 'charity'})
+        form = MoneyDonationForm(data={'money_total': Decimal('1.00'), 'money_splits': '1.0'})
         self.assertTrue(form.is_valid())
 
     def test_boundary1(self):
-        form = MoneyDonationForm(data={'money_total': Decimal('0.01'), 'money_splits': '1.0', 'charities': 'charity'})
+        form = MoneyDonationForm(data={'money_total': Decimal('0.01'), 'money_splits': '1.0'})
         self.assertTrue(form.is_valid())
 
     def test_boundary2(self):
-        form = MoneyDonationForm(data={'money_total': Decimal('999999.99'), 'money_splits': '1.0', 'charities': 'charity'})
+        form = MoneyDonationForm(data={'money_total': Decimal('999999.99'), 'money_splits': '1.0'})
         self.assertTrue(form.is_valid())
 
     def test_exception1(self):
-        form = MoneyDonationForm(data={'money_total': Decimal('0.00'), 'money_splits': '1.0', 'charities': 'charity'})
+        form = MoneyDonationForm(data={'money_total': Decimal('0.00'), 'money_splits': '1.0'})
         self.assertEqual(
             form.errors['money_total'], ['Ensure this value is greater than or equal to 0.01.']
         )
 
     def test_exception2(self):
-        form = MoneyDonationForm(data={'money_total': Decimal('1000000.00'), 'money_splits': '1.0', 'charities': 'charity'})
+        form = MoneyDonationForm(data={'money_total': Decimal('1000000.00'), 'money_splits': '1.0'})
         self.assertEqual(
             form.errors['money_total'], ['Ensure that there are no more than 8 digits in total.']
         )
@@ -69,9 +69,9 @@ class ProcessSplitsTests(TestCase):
             self.assertFalse(i > 0.3335 or i < 0.33)
 
     def test_boundary1(self):
-        splits = views.processSplits('0.0,0.99')
-        self.assertFalse(splits[0] > 0.0051 or splits[0] < 0.005)
-        self.assertFalse(splits[1] > 0.995 or splits[1] < 0.995)
+        splits = views.processSplits('0.00,0.99')
+        self.assertFalse(splits[0] > 0.00 or splits[0] < 0.00)
+        self.assertFalse(splits[1] > 1.00 or splits[1] < 1.00)
 
     def test_boundary2(self):
         splits = views.processSplits('0.01,0.98')
