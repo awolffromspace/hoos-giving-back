@@ -72,9 +72,9 @@ def pay(request):
     
     if request.method == 'POST':
 
-        '''
+        
         customer = stripe.Customer.create(
-                name=self.request.user,
+                name=self.request.user.username,
                 source=request.POST['stripeToken']
                 )
 
@@ -84,7 +84,6 @@ def pay(request):
                 currency = "usd",
                 description = "Donation"
                 )
-                '''
 
         return HttpResponseRedirect('/donations/')
 
