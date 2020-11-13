@@ -13,46 +13,24 @@ class Donation(models.Model):
 
 class MoneyDonation(Donation):
     money_total = models.DecimalField(max_digits=8, decimal_places=2)
+    charity = models.CharField(max_length=200, default='')
 
     def __str__(self):
-        return "{0} donated ${1} at {2}".format(
+        return "{0} donated ${1} to {2} at {3}".format(
             self.user.username,
             self.money_total,
+            self.charity,
             self.date_donated
         )
 
 class TimeDonation(Donation):
     time_total = models.DurationField()
-
-    def __str__(self):
-        return "{0} volunteered {1} time at {2}".format(
-            self.user.username,
-            self.time_total,
-            self.date_donated
-        )
-
-class MoneySplit(models.Model):
-    money_donation = models.ForeignKey(MoneyDonation, on_delete=models.CASCADE)
-    money_split = models.DecimalField(max_digits=5, decimal_places=4)
-    charity = models.CharField(max_length=200, default='')
-
-    def __str__(self):
-        return "{0} donated ${1} to {2} at {3}".format(
-            self.money_donation.user.username,
-            round(float(self.money_donation.money_total) * float(self.money_split), 2),
-            self.charity,
-            self.money_donation.date_donated
-        )
-
-class TimeSplit(models.Model):
-    time_donation = models.ForeignKey(TimeDonation, on_delete=models.CASCADE)
-    time_split = models.DecimalField(max_digits=5, decimal_places=4)
     task = models.CharField(max_length=200, default='')
 
     def __str__(self):
-        return "{0} volunteered {1} to {2} at {3}".format(
-            self.time_donation.user.username,
-            self.time_donation.time_total * float(self.time_split),
+        return "{0} volunteered {1} to do {2} at {3}".format(
+            self.user.username,
+            self.time_total,
             self.task,
-            self.time_donation.date_donated
+            self.date_donated
         )

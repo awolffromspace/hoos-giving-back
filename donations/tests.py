@@ -60,44 +60,36 @@ class ProcessSplitsTests(TestCase):
 
     def test_equivalence2(self):
         splits = views.processSplits('0.49,0.50')
-        self.assertFalse(splits[0] > 0.495 or splits[0] < 0.495)
-        self.assertFalse(splits[1] > 0.505 or splits[1] < 0.505)
+        self.assertFalse(splits[0] > 0.49 or splits[0] < 0.49)
+        self.assertFalse(splits[1] > 0.50 or splits[1] < 0.50)
 
     def test_equivalence3(self):
         splits = views.processSplits('0.33,0.33,0.33')
         for i in splits:
-            self.assertFalse(i > 0.3335 or i < 0.33)
+            self.assertFalse(i > 0.33 or i < 0.33)
 
     def test_boundary1(self):
         splits = views.processSplits('0.00,0.99')
         self.assertFalse(splits[0] > 0.00 or splits[0] < 0.00)
-        self.assertFalse(splits[1] > 1.00 or splits[1] < 1.00)
+        self.assertFalse(splits[1] > 0.99 or splits[1] < 0.99)
 
     def test_boundary2(self):
         splits = views.processSplits('0.01,0.98')
-        self.assertFalse(splits[0] > 0.015 or splits[0] < 0.015)
-        self.assertFalse(splits[1] > 0.985 or splits[1] < 0.985)
+        self.assertFalse(splits[0] > 0.01 or splits[0] < 0.01)
+        self.assertFalse(splits[1] > 0.98 or splits[1] < 0.98)
 
     def test_boundary2(self):
         splits = views.processSplits('0.99')
-        self.assertFalse(splits[0] > 1.00 or splits[0] < 1.00)
+        self.assertFalse(splits[0] > 0.99 or splits[0] < 0.99)
 
     def test_exception1(self):
-        splits = views.processSplits('0.49,0.49')
+        splits = views.processSplits('0.00')
         self.assertTrue(splits[0] == -1)
 
     def test_exception2(self):
-        splits = views.processSplits('0.0,0.98')
+        splits = views.processSplits('-1.00')
         self.assertTrue(splits[0] == -1)
 
     def test_exception3(self):
-        splits = views.processSplits('0.0')
-        self.assertTrue(splits[0] == -1)
-
-    def test_exception4(self):
-        splits = views.processSplits('1.01')
-        self.assertTrue(splits[0] == -1)
-
-    def test_exception5(self):
         splits = views.processSplits('text')
         self.assertTrue(splits[0] == -1)
