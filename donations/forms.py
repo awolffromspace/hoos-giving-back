@@ -5,8 +5,7 @@ from django.core.exceptions import ValidationError
 
 class MoneyDonationForm(forms.Form):
     money_total = forms.DecimalField(label='Money Total (USD)', max_digits=8, decimal_places=2, min_value=Decimal('0.01'))
-    money_splits = forms.CharField(label='Donation Splits (Enter decimal fractions separated by ,)')
-    charities = forms.CharField(label='Charities (Enter charities separated by ,)', max_length=200)
+    money_splits = forms.CharField(label='Donation Splits (Enter decimal fractions separated by ,)', widget=forms.HiddenInput())
 
 class TimeDonationForm(forms.Form):
     time_total = forms.DurationField(label='Time Total (s)')

@@ -31,21 +31,28 @@ class IndexView(generic.ListView):
         return all_donations
 
 def processSplits(splits_str):
+    if splits_str.endswith(','):
+        splits_str = splits_str[0 : len(splits_str) - 1]
     splits_strlst = splits_str.split(',')
     sum = 0
+    nonzeroTotal = 0
     splits = []
     for i in range(len(splits_strlst)):
         try:
-            splits.append(float(splits_strlst[i]))
+            split = float(splits_strlst[i])
+            splits.append(split)
+            if split > 0.00:
+                nonzeroTotal = nonzeroTotal + 1
+            sum += split
         except ValueError:
             return [-1]
-        else:
-            sum += splits[i]
     if sum < 0.99 or sum > 1.0:
         return [-1]
-    margin = (1.0 - sum) / len(splits)
+    margin = (1.0 - sum) / nonzeroTotal
     for i in range(len(splits)):
-        splits[i] += margin
+        split = splits[i]
+        if split > 0.00:
+            splits[i] += margin
     return splits
 
 def donate(request):
@@ -54,13 +61,13 @@ def donate(request):
         if form.is_valid():
             donation = MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=form.cleaned_data['money_total'])
             splits = processSplits(form.cleaned_data['money_splits'])
-            charities = form.cleaned_data['charities']
-            charities_lst = charities.split(',')
-            if splits[0] > -1 and len(splits) == len(charities_lst):
+            charities = ['The Trevor Project', 'The National Immigration Law Center', 'Human Rights Watch', 'The Global Fund for Women', 'Charity Water', 'Mental Health America']
+            if splits[0] > -1 and len(splits) == len(charities):
                 donation.save()
                 for i in range(len(splits)):
                     split = round(splits[i], 4)
-                    MoneySplit(money_donation=donation, money_split=split, charity=charities_lst[i]).save()
+                    if split > 0.00:
+                        MoneySplit(money_donation=donation, money_split=split, charity=charities[i]).save()
             else:
                 form = MoneyDonationForm()
                 render(request, 'donations/donate.html', {'form': form})
