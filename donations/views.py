@@ -62,7 +62,6 @@ def pay(request):
     How to fix me:
     - Need to somehow take in donation amount from last page
     - Need to have a name/email for customer (a string)... unsure how to get it using google login
-    - Do not know how to redirect to the feed after payment is submitted
     - The donation should not be recorded on the app until after payment is given
     '''
 
@@ -74,7 +73,7 @@ def pay(request):
 
         
         customer = stripe.Customer.create(
-                name=self.request.user.username,
+                name= "george",
                 source=request.POST['stripeToken']
                 )
 
