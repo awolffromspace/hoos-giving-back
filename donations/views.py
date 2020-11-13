@@ -6,8 +6,8 @@ from django.utils import timezone
 from django.views import generic
 from itertools import chain
 from operator import attrgetter
-from django.conf import settings
-from django.db import models
+
+
 
 from .forms import MoneyDonationForm, TimeDonationForm
 from .models import MoneyDonation, TimeDonation
@@ -72,25 +72,19 @@ def pay(request):
    
     
     if request.method == 'POST':
-
-        
-        user = models.ForeignKey(
-            settings.AUTH_USER_MODEL,
-            on_delete=models.CASCADE,
-        )
-
         
         customer = stripe.Customer.create(
-                name= user.username,
+                name= "george",
+                email="george@george.george"
                 source=request.POST['stripeToken']
             )
 
-#charge = stripe.Charge.create(
-#                customer=customer,
-#amount = 5
-#                currency = "usd",
-#                description = "Donation"
-#                )
+        charge = stripe.Charge.create(
+                customer=customer,
+                amount = 666,
+                currency = "usd",
+                description = "Donation"
+                )
 
         return HttpResponseRedirect('/donations/')
 
