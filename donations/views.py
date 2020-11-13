@@ -1,5 +1,6 @@
 import datetime
 
+from datetime import timedelta
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils import timezone
@@ -8,7 +9,7 @@ from itertools import chain
 from operator import attrgetter
 
 from .forms import MoneyDonationForm, TimeDonationForm
-from .models import MoneyDonation, TimeDonation
+from .models import Charity, Task, MoneyDonation, TimeDonation
 
 class IndexView(generic.ListView):
     template_name = 'donations/index.html'
@@ -52,12 +53,13 @@ def donate(request):
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
             splits = processSplits(form.cleaned_data['money_splits'])
-            charities = ['The Trevor Project', 'The National Immigration Law Center', 'Human Rights Watch', 'The Global Fund for Women', 'Charity Water', 'Mental Health America']
-            if splits[0] > -1 and len(splits) == len(charities):
-                donation.save()
-                for i in range(len(splits)):
+            charities = Charity.objects.all()
+            if splits[0] > -1:
+                index = 0
+                split = splits[index]
+                for charity in charities:
                     if split > 0.00:
-                        MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charities[i]).save()
+                        MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charity).save()
             else:
                 form = MoneyDonationForm()
                 render(request, 'donations/donate.html', {'form': form})
@@ -71,12 +73,13 @@ def volunteer(request):
         form = TimeDonationForm(request.POST)
         if form.is_valid():
             splits = processSplits(form.cleaned_data['time_splits'])
-            tasks = form.cleaned_data['tasks']
-            tasks_lst = tasks.split(',')
-            if splits[0] > -1 and len(splits) == len(tasks_lst):
-                volunteer.save()
-                for i in range(len(splits)):
-                    TimeDonation(user=request.user, date_donated=timezone.now(), time_total=split, task=tasks_lst[i])
+            tasks = Task.objects.all()
+            if splits[0] > -1:
+                index = 0
+                split = splits[index]
+                for task in tasks:
+                    if split > 0.00:
+                        TimeDonation(user=request.user, date_donated=timezone.now(), time_total=timedelta(minutes=split), task=task).save()
             else:
                 form = TimeDonationForm()
                 render(request, 'donations/volunteer.html', {'form': form})
