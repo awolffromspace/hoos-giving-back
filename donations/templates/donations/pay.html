@@ -40,7 +40,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 
-<form action="% url 'donate' %" method="post" id="payment-form">
+<form action="{% url 'donate %}" method="post" id="payment-form">
 	{% csrf_token %}
   <div class="form-row">
     <label for="card-element">
@@ -54,7 +54,7 @@
     <div id="card-errors" role="alert"></div>
   </div>
 
-  <button>Submit Payment</button>
+  <button>Complete donation</button>
 </form>
 
 <script>
