@@ -57,5 +57,20 @@ def volunteer(request):
     return render(request, 'donations/volunteer.html', {'form': form})
 
 def pay(request):
+    amount = 1
+
+    if request.method == 'POST':
+        customer = stripe.Customer.create(
+                name=self.request.user,
+                source=request.POST['stripeToken']
+                )
+
+        charge = stripe.Charge.create(
+                customer=customer,
+                amount = 5
+                currency = "usd",
+                description = "Donation"
+                )
+
     return render(request, 'donations/pay.html')
 
