@@ -10,6 +10,10 @@ from operator import attrgetter
 from .forms import MoneyDonationForm, TimeDonationForm
 from .models import MoneyDonation, TimeDonation
 
+import stripe
+
+stripe.api_key = "sk_test_51Hmsn6A6a6h8LgDy02KZ3YjlftIk89TbokiSyGJ2GPGZ6LUN4bFFnpBMa2ONGXwH4U09yxy4KIdpd9G6MF7ATWkh007YmN3paT"
+
 class IndexView(generic.ListView):
     template_name = 'donations/index.html'
     context_object_name = 'donation_list'
@@ -51,3 +55,7 @@ def volunteer(request):
     else:
         form = TimeDonationForm()
     return render(request, 'donations/volunteer.html', {'form': form})
+
+def pay(request):
+    return None
+
