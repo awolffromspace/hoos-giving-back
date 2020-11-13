@@ -12,11 +12,11 @@
           <label for="task{{ forloop.counter }}">{{ task.name }}:</label>
           <p>{{ task.desc }}</p>
           <div class="range-wrap">
-            <input type="range" class="range" link-to="task{{ forloop.counter }}" min="0.00" max="100.00" step="0.01" value="0.00">
+            <input type="range" class="range" link-to="task{{ forloop.counter }}" min="0" max="100" step="1" value="0.00">
             <output class="bubble"></output>
           </div>
           <br><br>
-          <b>$</b><input type="text" id="task{{ forloop.counter }}"><br><br>
+          <input type="text" id="task{{ forloop.counter }}"><b>minutes</b><br><br>
         {% endfor %}
         <input type="hidden" id="id_time_total">
         <input type="submit" value="Submit" class="btn btn-primary" onclick="joinSplits();">
