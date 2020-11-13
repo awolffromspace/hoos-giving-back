@@ -7,4 +7,4 @@ class MoneyDonationForm(forms.Form):
     money_splits = forms.CharField(label='Donation Splits', widget=forms.HiddenInput())
 
 class TimeDonationForm(forms.Form):
-    time_splits = forms.CharField(label='Volunteer Splits')
+    time_splits = forms.CharField(label='Volunteer Splits', widget=forms.HiddenInput())

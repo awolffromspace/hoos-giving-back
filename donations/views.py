@@ -49,11 +49,11 @@ def processSplits(splits_str):
     return splits
 
 def donate(request):
+    charities = Charity.objects.all()
     if request.method == 'POST':
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
             splits = processSplits(form.cleaned_data['money_splits'])
-            charities = Charity.objects.all()
             if splits[0] > -1:
                 index = 0
                 for charity in charities:
@@ -68,14 +68,14 @@ def donate(request):
             return HttpResponseRedirect('/donations/')
     else:
         form = MoneyDonationForm()
-    return render(request, 'donations/donate.html', {'form': form})
+    return render(request, 'donations/donate.html', {'form': form, 'charity_list': charities})
 
 def volunteer(request):
+    tasks = Tasks.objects.all()
     if request.method == 'POST':
         form = TimeDonationForm(request.POST)
         if form.is_valid():
             splits = processSplits(form.cleaned_data['time_splits'])
-            tasks = Task.objects.all()
             if splits[0] > -1:
                 index = 0
                 for task in tasks:
@@ -89,4 +89,4 @@ def volunteer(request):
             return HttpResponseRedirect('/donations/')
     else:
         form = TimeDonationForm()
-    return render(request, 'donations/volunteer.html', {'form': form})
+    return render(request, 'donations/volunteer.html', {'form': form, 'task_list': tasks})

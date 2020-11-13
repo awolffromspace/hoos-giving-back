@@ -1,14 +1,87 @@
 {% extends 'donations/base.html' %}
 {% block content %}
 
-{% if user.is_authenticated %}
-    <form action="/donations/volunteer/" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
+<div class="wrapper">
+  {% if user.is_authenticated %}
+    {% if task_list %}
+      <form action="/donations/volunteer/" method="post">
+      	{% csrf_token %}
+      	{{ form.as_p }}
+      	<p><b>Volunteer</b></p>
+        {% for task in task_list %}
+          <label for="task{% forloop.counter %}">{% task.name %}:</label>
+          <p>{% task.desc %}</p>
+          <div class="range-wrap">
+            <input type="range" class="range" link-to="task{% forloop.counter %}" min="0.00" max="100.00" step="0.01" value="0.00">
+            <output class="bubble"></output>
+          </div>
+          <br><br>
+          <b>$</b><input type="text" id="task{% forloop.counter %}"><br><br>
+        {% endfor %}
+      <input type="hidden" id="id_time_total">
+      <input type="submit" value="Submit" class="btn btn-primary" onclick="joinSplits();">
     </form>
-{% else %}
-    <p>You aren't logged in.</p>
-{% endif %}
 
-{% endblock%}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+    const allRanges = document.querySelectorAll(".range-wrap");
+    allRanges.forEach(wrap => {
+      const range = wrap.querySelector(".range");
+      const bubble = wrap.querySelector(".bubble");
+
+      range.addEventListener("input", () => {
+        setBubble(range, bubble);
+      });
+      setBubble(range, bubble);
+    });
+
+    function setBubble(range, bubble) {
+      const val = range.value;
+      const min = range.min ? range.min : 0;
+      const max = range.max ? range.max : 100;
+      const newVal = Number(((val - min) * 100) / (max - min));
+      bubble.innerHTML = val;
+      bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+    }
+
+    function joinSplits() {
+      var index = 1;
+      var task = "task" + index.toString();
+      var time_total = 0;
+      var time_splits = "";
+      while (document.getElementById(task) !== null) {
+        time_total += document.getElementById(task).value;
+        time_splits += document.getElementById(task).value + ",";
+        $(task).prop('disabled', true);
+        index++;
+        task = "task" + index.toString();
+      }
+      document.getElementById('id_time_total').value = time_total;
+      document.getElementById('id_time_splits').value = time_splits;
+    }
+
+    $(function() {
+      $('input').filter( function(){return this.type == 'range' } ).each(function(){  
+        var $slider = $(this),
+          $text_box = $('#'+$(this).attr('link-to'));
+        
+        $text_box.val(this.value);
+        
+        $slider.change(function(){
+          $text_box.val(this.value);
+        });
+        
+        $text_box.change(function(){
+          $slider.val($text_box.val());
+        });
+
+      });
+    });
+    </script>
+  {% else %}
+    <p>You aren't logged in.</p>
+  {% endif %}
+</div>
+
+{% endblock content %}
