@@ -34,6 +34,32 @@
       margin-right: 10px;
     }
 
+    .tooltip {
+      font-family: Helvetica;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .tooltip-inner {
+      background-color: #EECFAE !important;
+      color: white;
+    }
+    .bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^="top"] .arrow::before {
+      border-top-color: #EECFAE !important;
+    }
+
+    .bs-tooltip-right .arrow::before, .bs-tooltip-auto[x-placement^="right"] .arrow::before {
+      border-right-color: #EECFAE !important;
+    }
+
+   .bs-tooltip-bottom .arrow::before, .bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
+    border-bottom-color: #EECFAE !important;
+   }
+
+  .bs-tooltip-left .arrow::before, .bs-tooltip-auto[x-placement^="left"] .arrow::before {
+    border-left-color: #EECFAE !important;
+  }
+
     </style>
 
     <title>Project 1-34</title>
@@ -62,6 +88,11 @@
     {% block content %}
 
     {% endblock content %}
+    <script>
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

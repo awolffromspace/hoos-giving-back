@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/donations/templates/donations/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/donations/templates/donations/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/donations/templates/donations/donate.html" beforeDir="false" afterPath="$PROJECT_DIR$/donations/templates/donations/donate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/donations/templates/donations/volunteer.html" beforeDir="false" afterPath="$PROJECT_DIR$/donations/templates/donations/volunteer.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +89,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604677466836</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="styled donate page">
+      <created>1605285844516</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605285844516</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -98,13 +104,14 @@
     <MESSAGE value="updated models, views, tests, forms, admin, to reflect git" />
     <MESSAGE value="updated tests to resolve merge conflicts" />
     <MESSAGE value="fix vector deployment" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix vector deployment" />
+    <MESSAGE value="styled donate page" />
+    <option name="LAST_COMMIT_MESSAGE" value="styled donate page" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="271" y="64" key="CommitChangelistDialog2" timestamp="1604677466680">
+    <state x="271" y="64" key="CommitChangelistDialog2" timestamp="1605285844261">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="271" y="64" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1604677466680" />
+    <state x="271" y="64" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1605285844261" />
     <state x="0" y="100" key="SettingsEditor" timestamp="1604503075981">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
