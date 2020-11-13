@@ -57,10 +57,22 @@ def volunteer(request):
     return render(request, 'donations/volunteer.html', {'form': form})
 
 def pay(request):
+
+    '''
+    How to fix me:
+    - Need to somehow take in donation amount from last page
+    - Need to have a name/email for customer (a string)... unsure how to get it using google login
+    - Do not know how to redirect to the feed after payment is submitted
+    - The donation should not be recorded on the app until after payment is given
+    '''
+
+
     amount = 1
    
-    '''
+    
     if request.method == 'POST':
+
+        '''
         customer = stripe.Customer.create(
                 name=self.request.user,
                 source=request.POST['stripeToken']
@@ -73,6 +85,8 @@ def pay(request):
                 description = "Donation"
                 )
                 '''
+
+        return HttpResponseRedirect('donations/pay')
 
     return render(request, 'donations/pay.html')
 
