@@ -5,7 +5,7 @@
   <form action="/donations/donate/" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit" class="btn btn-primary">
+    <input type="submit" value="Submit" class="btn btn-primary" onclick="joinSplits();">
   </form>
 
   <label for="charity1">The Trevor Project</label>
@@ -83,7 +83,6 @@
     var charity5 = document.getElementById('charity5').value;
     var charity6 = document.getElementById('charity6').value;
     document.getElementById('id_money_splits').value = charity1 + "," + charity2 + "," + charity3 + "," + charity4 + "," + charity5 + "," + charity6;
-    alert(document.getElementById('id_money_splits').value);
   }
   </script>
 {% else %}
