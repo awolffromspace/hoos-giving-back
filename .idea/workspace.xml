@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29bdb2ce-a272-469b-88a4-852fc3db467b" name="Default Changelist" comment="" />
+    <list default="true" id="29bdb2ce-a272-469b-88a4-852fc3db467b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/donations/templates/donations/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/donations/templates/donations/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/donations/templates/donations/donate.html" beforeDir="false" afterPath="$PROJECT_DIR$/donations/templates/donations/donate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/donations/templates/donations/volunteer.html" beforeDir="false" afterPath="$PROJECT_DIR$/donations/templates/donations/volunteer.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +21,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="IgnoredFileRootStore">
     <option name="generatedRoots">
@@ -103,9 +109,13 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="0" y="100" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1604503075981" />
-    <state x="169" y="294" key="com.intellij.ide.util.TipDialog" timestamp="1604502426214">
+    <state x="169" y="294" key="com.intellij.ide.util.TipDialog" timestamp="1605276858019">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="169" y="294" key="com.intellij.ide.util.TipDialog/0.23.1440.877@0.23.1440.877" timestamp="1604502426214" />
+    <state x="169" y="294" key="com.intellij.ide.util.TipDialog/0.23.1440.877@0.23.1440.877" timestamp="1605276858019" />
+    <state x="434" y="385" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605277736896">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="434" y="385" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1605277736896" />
   </component>
 </project>
