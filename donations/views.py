@@ -76,14 +76,14 @@ def pay(request):
                 name= "george",
                 source=request.POST['stripeToken']
                 )
-
+    '''
         charge = stripe.Charge.create(
                 customer=customer,
                 amount = 5
                 currency = "usd",
                 description = "Donation"
                 )
-
+'''
         return HttpResponseRedirect('/donations/')
 
     return render(request, 'donations/pay.html')
