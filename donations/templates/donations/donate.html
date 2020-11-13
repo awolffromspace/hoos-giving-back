@@ -60,7 +60,7 @@ sliders.each(function() {
         min: 0,
         max: availableTotal,
         range: "max",
-        step: 2,
+        step: 1,
         animate: 0,
         slide: function(event, ui) {
             
@@ -85,7 +85,7 @@ sliders.each(function() {
                 var t = $(this),
                     value = t.slider("option", "value");
 
-                var new_value = value + (delta/2);
+                var new_value = value + (delta/4);
                 
                 if (new_value < 0 || ui.value == 100) 
                     new_value = 0;
