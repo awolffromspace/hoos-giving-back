@@ -8,28 +8,30 @@
     <input type="submit" value="Submit" class="btn btn-primary">
   </form>
 
-  <ul id="sliders">
-    <li>
-      <div class="slider">20</div>
-      <span class="value">0</span>%
-    </li>
-    <li>
-      <div class="slider">20</div>
-      <span class="value" >0</span>%
-    </li>
-    <li>
-      <div class="slider">20</div>
-      <span class="value">0</span>%
-    </li>
-    <li>
-      <div class="slider">20</div>
-      <span class="value">0</span>%
-    </li>
-    <li>
-      <div class="slider">20</div>
-      <span class="value">0</span>%
-    </li>
-  </ul>
+  <div class="range-wrap" style="width: 25%;">
+    <input type="range" class="range" min="0.00" max="1.00" step="0.01">
+    <output class="bubble"></output>
+  </div>
+  <div class="range-wrap" style="width: 25%;">
+    <input type="range" class="range" min="0.00" max="1.00" step="0.01">
+    <output class="bubble"></output>
+  </div>
+  <div class="range-wrap" style="width: 25%;">
+    <input type="range" class="range" min="0.00" max="1.00" step="0.01">
+    <output class="bubble"></output>
+  </div>
+  <div class="range-wrap" style="width: 25%;">
+    <input type="range" class="range" min="0.00" max="1.00" step="0.01">
+    <output class="bubble"></output>
+  </div>
+  <div class="range-wrap" style="width: 25%;">
+    <input type="range" class="range" min="0.00" max="1.00" step="0.01">
+    <output class="bubble"></output>
+  </div>
+  <div class="range-wrap" style="width: 25%;">
+    <input type="range" class="range" min="0.00" max="1.00" step="0.01">
+    <output class="bubble"></output>
+  </div>
 
   <h3>The Trevor Project</h3>
   <p>The ultimate goal of The Trevor Project is to end suicide among LGBTQ people under 25 by providing them with counseling and education. It offers young people support with trained counselors via phone, text, and online chat. Every $1 donated allows people to get one more minute of counseling.</p>
@@ -47,57 +49,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script>
-var sliders = $("#sliders .slider");
-var availableTotal = 100;
+  const allRanges = document.querySelectorAll(".range-wrap");
+  allRanges.forEach(wrap => {
+    const range = wrap.querySelector(".range");
+    const bubble = wrap.querySelector(".bubble");
 
-sliders.each(function() {
-    var init_value = parseInt($(this).text());
-
-    $(this).siblings('.value').text(init_value);
-
-    $(this).empty().slider({
-        value: init_value,
-        min: 0,
-        max: availableTotal,
-        range: "max",
-        step: 1,
-        animate: 0,
-        slide: function(event, ui) {
-            
-            // Update display to current value
-            $(this).siblings('.value').text(ui.value);
-
-            // Get current total
-            var total = 0;
-
-            sliders.not(this).each(function() {
-                total += $(this).slider("option", "value");
-            });
-
-            // Need to do this because apparently jQ UI
-            // does not update value until this event completes
-            total += ui.value;
-
-            var delta = availableTotal - total;
-            
-            // Update each slider
-            sliders.not(this).each(function() {
-                var t = $(this),
-                    value = t.slider("option", "value");
-
-                var new_value = value + (delta/4);
-                
-                if (new_value < 0 || ui.value == 100) 
-                    new_value = 0;
-                if (new_value > 100) 
-                    new_value = 100;
-
-                t.siblings('.value').text(new_value);
-                t.slider('value', new_value);
-            });
-        }
+    range.addEventListener("input", () => {
+      setBubble(range, bubble);
     });
-});
+    setBubble(range, bubble);
+  });
+
+  function setBubble(range, bubble) {
+    const val = range.value;
+    const min = range.min ? range.min : 0;
+    const max = range.max ? range.max : 100;
+    const newVal = Number(((val - min) * 100) / (max - min));
+    bubble.innerHTML = val;
+    bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+  }
   </script>
 {% else %}
   <p>You aren't logged in.</p>
