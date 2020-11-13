@@ -36,7 +36,9 @@ def processSplits(splits_str):
     splits = []
     for i in range(len(splits_strlst)):
         try:
-            splits.append(float(splits_strlst[i]))
+            split = float(splits_strlst[i])
+            if split > 0.00:
+                splits.append(split)
         except ValueError:
             return [-1]
         else:
