@@ -76,15 +76,14 @@
   }
 
   function joinSplits() {
-    var index = 1;
-    var charity = "charity" + index.toString();
-    var money_splits = "";
-    while (document.getElementById(charity).value !== null) {
-      money_splits += document.getElementById(charity).value;
-      index++;
-      charity = "charity" + index.toString();
-    }
-    document.getElementById('id_money_splits').value = money_splits;
+    var charity1 = document.getElementById('charity1').value;
+    var charity2 = document.getElementById('charity2').value;
+    var charity3 = document.getElementById('charity3').value;
+    var charity4 = document.getElementById('charity4').value;
+    var charity5 = document.getElementById('charity5').value;
+    var charity6 = document.getElementById('charity6').value;
+    document.getElementById('id_money_splits').value = charity1 + "," + charity2 + "," + charity3 + "," + charity4 + "," + charity5 + "," + charity6;
+    alert(document.getElementById('charity7').value);
   }
   </script>
 {% else %}
