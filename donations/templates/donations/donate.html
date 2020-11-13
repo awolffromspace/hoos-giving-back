@@ -8,7 +8,7 @@
       {{ form.as_p }}
 
       <p><b></b></p>
-      <label for="charity1", style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">The Trevor Project</label>
+      <label for="charity1" data-toggle="tooltip" data-placement="right" title="wanna learn more? click to check out their site 🐝", style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">The Trevor Project</label>
       <p style = "letter-spacing: .25px;"><span style="font-weight:600; color: #EF476F;">The ultimate goal</span> of The Trevor Project is to end suicide among LGBTQ+ people under 25 by providing them with <span style="font-weight:600; color: #EF476F;">counseling</span> and <span style="font-weight:600; color: #EF476F;">education</span>. They offer young people support with trained counselors via <span style="font-weight:600; color: #EF476F;">phone, text,</span> and <span style="font-weight:600; color: #EF476F;">online chat.</span> Every $1 donated = 1 more minute of counseling!</p>
       <div class="range-wrap">
         <input type="range" class="range" id="charity1" min="0.00" max="1.00" step="0.01" value="0.00">
@@ -58,8 +58,7 @@
         <output class="bubble"></output>
       </div>
       <br><br>
-
-      <input type="submit" value="submit" class="btn btn-primary" onclick="joinSplits();">
+      <input type="submit" value="submit" class="btn btn-primary" onclick="joinSplits();", style = "letter-spacing: .5px;border: none; border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">
 
     </form>
 
