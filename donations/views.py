@@ -60,6 +60,7 @@ def donate(request):
                 for charity in charities:
                     if split > 0.00:
                         MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charity).save()
+                    index += 1
             else:
                 form = MoneyDonationForm()
                 render(request, 'donations/donate.html', {'form': form})
@@ -80,6 +81,7 @@ def volunteer(request):
                 for task in tasks:
                     if split > 0.00:
                         TimeDonation(user=request.user, date_donated=timezone.now(), time_total=timedelta(minutes=split), task=task).save()
+                    index += 1
             else:
                 form = TimeDonationForm()
                 render(request, 'donations/volunteer.html', {'form': form})
