@@ -79,8 +79,8 @@
     var index = 1;
     var charity = "charity" + index.toString();
     var money_splits = "";
-    while (currentCharity !== null) {
-      money_splits += document.getElementById(currentCharity).value;
+    while (document.getElementById(charity).value !== null) {
+      money_splits += document.getElementById(charity).value;
       index++;
       charity = "charity" + index.toString();
     }
