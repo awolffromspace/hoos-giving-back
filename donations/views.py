@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.views import generic
 from itertools import chain
 from operator import attrgetter
+from django.conf import settings
 from django.db import models
 
 from .forms import MoneyDonationForm, TimeDonationForm
