@@ -72,6 +72,12 @@ def pay(request):
     if request.method == 'POST':
 
         
+        user = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,
+        )
+
+        
         customer = stripe.Customer.create(
                 name= user.username,
                 source=request.POST['stripeToken']
