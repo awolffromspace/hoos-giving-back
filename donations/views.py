@@ -56,12 +56,12 @@ def donate(request):
             charities = Charity.objects.all()
             if splits[0] > -1:
                 index = 0
-                split = splits[index]
                 for charity in charities:
+                    split = splits[index]
                     if split > 0.00:
                         MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charity).save()
                     index += 1
-                    split = splits[index]
+                    
             else:
                 form = MoneyDonationForm()
                 render(request, 'donations/donate.html', {'form': form})
@@ -78,12 +78,11 @@ def volunteer(request):
             tasks = Task.objects.all()
             if splits[0] > -1:
                 index = 0
-                split = splits[index]
                 for task in tasks:
+                    split = splits[index]
                     if split > 0.00:
                         TimeDonation(user=request.user, date_donated=timezone.now(), time_total=timedelta(minutes=split), task=task).save()
                     index += 1
-                    split = splits[index]
             else:
                 form = TimeDonationForm()
                 render(request, 'donations/volunteer.html', {'form': form})
