@@ -50,6 +50,7 @@
     <output class="bubble"></output>
   </div>
   <br><br>
+  <input type="button" value="Join" onclick="joinSplits();">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -72,6 +73,17 @@
     const newVal = Number(((val - min) * 100) / (max - min));
     bubble.innerHTML = val;
     bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+  }
+
+  function joinSplits() {
+    var charity1 = document.getElementById('charity1').value;
+    var charity2 = document.getElementById('charity2').value;
+    var charity3 = document.getElementById('charity3').value;
+    var charity4 = document.getElementById('charity4').value;
+    var charity5 = document.getElementById('charity5').value;
+    var charity6 = document.getElementById('charity6').value;
+    document.getElementById('id_money_splits').value = charity1 + charity2 + charity3 + charity4 + charity5 + charity6;
+    alert(document.getElementById('id_money_splits').value);
   }
   </script>
 {% else %}
