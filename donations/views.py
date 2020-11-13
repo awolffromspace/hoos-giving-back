@@ -73,7 +73,7 @@ def pay(request):
 
         
         customer = stripe.Customer.create(
-                name= self.request.user.username,
+                name= user.username,
                 source=request.POST['stripeToken']
             )
 
