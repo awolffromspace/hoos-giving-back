@@ -86,7 +86,7 @@ def pay(request):
                 )
                 '''
 
-        return HttpResponseRedirect('donations/pay')
+        return HttpResponseRedirect('/donations/')
 
     return render(request, 'donations/pay.html')
 
