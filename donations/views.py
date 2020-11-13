@@ -40,7 +40,7 @@ def donate(request):
         if form.is_valid():
             money_donation = MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=form.cleaned_data['money_total'])
             money_donation.save()
-            return HttpResponseRedirect('/donations/')
+            return HttpResponseRedirect('/donations/pay/')
     else:
         form = MoneyDonationForm()
     return render(request, 'donations/donate.html', {'form': form})
