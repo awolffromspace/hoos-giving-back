@@ -78,13 +78,16 @@
     function joinSplits() {
       var index = 1;
       var charity = "charity" + index.toString();
+      var money_total = 0;
       var money_splits = "";
       while (document.getElementById(charity) !== null) {
+        money_total += document.getElementById(charity).value;
         money_splits += document.getElementById(charity).value + ",";
         $(charity).prop('disabled', true);
         index++;
         charity = "charity" + index.toString();
       }
+      document.getElementById('id_money_total').value = money_total;
       document.getElementById('id_money_splits').value = money_splits;
 
     }
