@@ -31,20 +31,21 @@ class IndexView(generic.ListView):
         return all_donations
 
 def processSplits(splits_str):
+    if splits_str.endswith(','):
+        splits_str = splits_str[0 : len(splits_str) - 1]
     splits_strlst = splits_str.split(',')
     sum = 0
     nonzeroTotal = 0
     splits = []
-    for i in range(len(splits_strlst) - 1):
+    for i in range(len(splits_strlst)):
         try:
             split = float(splits_strlst[i])
             splits.append(split)
             if split > 0.00:
                 nonzeroTotal = nonzeroTotal + 1
+            sum += split
         except ValueError:
             return [-1]
-        else:
-            sum += splits[i]
     if sum < 0.99 or sum > 1.0:
         return [-1]
     margin = (1.0 - sum) / nonzeroTotal

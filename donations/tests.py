@@ -69,9 +69,9 @@ class ProcessSplitsTests(TestCase):
             self.assertFalse(i > 0.3335 or i < 0.33)
 
     def test_boundary1(self):
-        splits = views.processSplits('0.0,0.99')
-        self.assertFalse(splits[0] > 0.0051 or splits[0] < 0.005)
-        self.assertFalse(splits[1] > 0.995 or splits[1] < 0.995)
+        splits = views.processSplits('0.00,0.99')
+        self.assertFalse(splits[0] > 0.00 or splits[0] < 0.00)
+        self.assertFalse(splits[1] > 1.00 or splits[1] < 1.00)
 
     def test_boundary2(self):
         splits = views.processSplits('0.01,0.98')
