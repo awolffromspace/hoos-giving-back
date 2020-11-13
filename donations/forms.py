@@ -14,7 +14,7 @@ CHARITY_CHOICES = (
 
 class MoneyDonationForm(forms.Form):
     money_total = forms.DecimalField(label='Money Total (USD)', max_digits=8, decimal_places=2, min_value=Decimal('0.01'))
-    money_splits = forms.CharField(label='Donation Splits (Enter decimal fractions separated by ,)')
+    money_splits = forms.CharField(label='Donation Splits (Enter decimal fractions separated by ,)', widget=forms.HiddenInput())
     charities = forms.MultipleChoiceField(label='Charities (Hold Ctrl to select multiple)', choices=CHARITY_CHOICES)
 
 class TimeDonationForm(forms.Form):
