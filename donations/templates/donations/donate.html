@@ -1,218 +1,97 @@
 {% extends 'donations/base.html' %}
 {% block content %}
 
-
-{% if user.is_authenticated %}
+<div class="wrapper">
+  {% if user.is_authenticated %}
     <form action="/donations/donate/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p><b></b></p>
+      <label for="charity1", style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">The Trevor Project</label>
+      <p style = "letter-spacing: .25px;"><span style="font-weight:600; color: #EF476F;">The ultimate goal</span> of The Trevor Project is to end suicide among LGBTQ+ people under 25 by providing them with <span style="font-weight:600; color: #EF476F;">counseling</span> and <span style="font-weight:600; color: #EF476F;">education</span>. They offer young people support with trained counselors via <span style="font-weight:600; color: #EF476F;">phone, text,</span> and <span style="font-weight:600; color: #EF476F;">online chat.</span> Every $1 donated = 1 more minute of counseling!</p>
+      <div class="range-wrap">
+        <input type="range" class="range" id="charity1" min="0.00" max="1.00" step="0.01" value="0.00">
+        <output class="bubble"></output>
+      </div>
+      <br><br>
+        <label for="charity2", style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #1B9AAA; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;" >The National Immigration Law Center</label>
+        <p style = "letter-spacing: .25px;">The NLIC has <span style="font-weight:600; color: #1B9AAA;"> defended </span> the rights of low-income immigrants in the US since 1979. Working to provide <span style="font-weight:600; color: #1B9AAA;"> access to healthcare </span> and fight <span style="font-weight:600; color: #1B9AAA;"> unconstitutional immigration policy,</span> they also help <span style="font-weight:600; color: #1B9AAA;"> educate the public</span> on the impact of public policy on this marginalized community.</p>
+      <div class="range-wrap">
+        <input type="range" class="range" id="charity2" min="0.00" max="1.00" step="0.01" value="0.00">
+        <output class="bubble"></output>
+      </div>
+      <br><br>
+        <label for="charity3", style ="letter-spacing: .5px; color: #565554; font-weight: bold; background-color: #FFC43D; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">Human Rights Watch</label>
+        <p style = "letter-spacing: .25px;"><span style="font-weight:600; color: #FFC43D;">Defending the rights</span> of people across the globe is no small task, but Human Rights Watch has been doing just this since 1978. Over <span style="font-weight:600; color: #FFC43D;">400</span>  journalists, attorneys, country experts, and advocates work to publish <span style="font-weight:600; color: #FFC43D;">non-partisan</span> and <span style="font-weight:600; color: #FFC43D;">independent</span> reports every year on human rights conditions around the world.</p>
+      <div class="range-wrap">
+        <input type="range" class="range" id="charity3" min="0.00" max="1.00" step="0.01" value="0.00">
+        <output class="bubble"></output>
+      </div>
+      <br><br>
+        <label for="charity4", style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #06D6A0; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">The Global Fund for Women</label>
+        <p style = "letter-spacing: .25px;">The Global Fund for Women proudly calls itself and its supporters <span style="font-weight:600; color: #06D6A0;">champions for equality</span>. From setting up the first <span style="font-weight:600; color: #06D6A0;">women's fund</span> in Nepal to funding <span style="font-weight:600; color: #06D6A0;">secret schools</span> in Afghanistan, this bold organization strives to <span style="font-weight:600; color: #06D6A0;">empower women and girls</span> around the world and ensure they are granted basic human rights.</p>
+      <div class="range-wrap">
+        <input type="range" class="range" id="charity4" min="0.00" max="1.00" step="0.01" value="0.00">
+        <output class="bubble"></output>
+      </div>
+      <br><br>
+        <label for="charity5", style ="letter-spacing: .5px; color: #565554; font-weight: bold; background-color: #EECFAE; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">charity: water</label>
+        <p style = "letter-spacing: .25px;">According to charity: water, <span style="font-weight:600; color: #EECFAE;">1 in 10 people</span> don’t have access to clean drinking water. charity: water hopes to change these stats by bringing <span style="font-weight:600; color: #EECFAE;">clean</span> and <span style="font-weight:600; color: #EECFAE;">safe</span> drinking water to developing countries, already funding over <span style="font-weight:600; color: #EECFAE;">29,000 water projects</span> around the world.</p>
+      <div class="range-wrap">
+        <input type="range" class="range" id="charity5" min="0.00" max="1.00" step="0.01" value="0.00">
+        <output class="bubble"></output>
+      </div>
+      <br><br>
+        <label for="charity6", style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">Mental Health America</label>
+        <p style = "letter-spacing: .25px;">Founded in 1909, MHA helps Americans <span style="font-weight:600; color: #EF476F;">understand, prevent</span> and <span style="font-weight:600; color: #EF476F;">treat</span> mental health issues that can interfere with their overall wellness and ability to live a healthy life. They also focus on <span style="font-weight:600; color: #EF476F;">educating</span> Americans about mental health issues through their <span style="font-weight:600; color: #EF476F;">online hub</span> of information and tools.</p>
+      <div class="range-wrap">
+        <input type="range" class="range" id="charity6" min="0.00" max="1.00" step="0.01" value="0.00">
+        <output class="bubble"></output>
+      </div>
+      <br><br>
+      <input type="submit" value="submit" class="btn btn-primary" onclick="joinSplits();">
     </form>
-    <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-/*the container must be positioned relative:*/
-.custom-select {
-  position: relative;
-  font-family: Arial;
-}
 
-.custom-select select {
-  display: none; /*hide original SELECT element:*/
-}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+    const allRanges = document.querySelectorAll(".range-wrap");
+    allRanges.forEach(wrap => {
+      const range = wrap.querySelector(".range");
+      const bubble = wrap.querySelector(".bubble");
 
-.select-selected {
-  background-color: Green;
-}
-
-/*style the arrow inside the select element:*/
-.select-selected:after {
-  position: absolute;
-  content: "";
-  top: 14px;
-  right: 10px;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
-}
-
-/*point the arrow upwards when the select box is open (active):*/
-.select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
-  top: 7px;
-}
-
-/*style the items (options), including the selected item:*/
-.select-items div,.select-selected {
-  color: #ffffff;
-  padding: 8px 16px;
-  border: 1px solid transparent;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  cursor: pointer;
-  user-select: none;
-}
-
-/*style items (options):*/
-.select-items {
-  position: absolute;
-  background-color: Green;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 99;
-}
-
-/*hide the items when the select box is closed:*/
-.select-hide {
-  display: none;
-}
-
-.select-items div:hover, .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-</style>
-</head>     
-
-<body>
-
-<!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
-<div class="custom-select" style="width:200px;">
-  <select>
-    <option value="0">Select Charity</option>
-    <option value="1">The Trevor Project</option>
-    <option value="2">THe National Immigration Law Center</option>
-    <option value="3">Human Rights Watch</option>
-    <option value="4">The Global Fund for Women</option>
-    <option value="5">Charity Water</option>
-    <option value="6">Mental Health America</option>
-  </select>
-</div>
-
-<div class="custom-select" style="width:200px;">
-  <select>
-    <option value="0">Select Charity</option>
-    <option value="1">The Trevor Project</option>
-    <option value="2">THe National Immigration Law Center</option>
-    <option value="3">Human Rights Watch</option>
-    <option value="4">The Global Fund for Women</option>
-    <option value="5">Charity Water</option>
-    <option value="6">Mental Health America</option>
-  </select>
-</div>
-
-<div class="custom-select" style="width:200px;">
-  <select>
-    <option value="0">Select Charity</option>
-    <option value="1">The Trevor Project</option>
-    <option value="2">THe National Immigration Law Center</option>
-    <option value="3">Human Rights Watch</option>
-    <option value="4">The Global Fund for Women</option>
-    <option value="5">Charity Water</option>
-    <option value="6">Mental Health America</option>
-  </select>
-</div>
-
-<script>
-var x, i, j, l, ll, selElmnt, a, b, c;
-/*look for any elements with the class "custom-select":*/
-x = document.getElementsByClassName("custom-select");
-l = x.length;
-for (i = 0; i < l; i++) {
-  selElmnt = x[i].getElementsByTagName("select")[0];
-  ll = selElmnt.length;
-  /*for each element, create a new DIV that will act as the selected item:*/
-  a = document.createElement("DIV");
-  a.setAttribute("class", "select-selected");
-  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-  x[i].appendChild(a);
-  /*for each element, create a new DIV that will contain the option list:*/
-  b = document.createElement("DIV");
-  b.setAttribute("class", "select-items select-hide");
-  for (j = 1; j < ll; j++) {
-    /*for each option in the original select element,
-    create a new DIV that will act as an option item:*/
-    c = document.createElement("DIV");
-    c.innerHTML = selElmnt.options[j].innerHTML;
-    c.addEventListener("click", function(e) {
-        /*when an item is clicked, update the original select box,
-        and the selected item:*/
-        var y, i, k, s, h, sl, yl;
-        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-        sl = s.length;
-        h = this.parentNode.previousSibling;
-        for (i = 0; i < sl; i++) {
-          if (s.options[i].innerHTML == this.innerHTML) {
-            s.selectedIndex = i;
-            h.innerHTML = this.innerHTML;
-            y = this.parentNode.getElementsByClassName("same-as-selected");
-            yl = y.length;
-            for (k = 0; k < yl; k++) {
-              y[k].removeAttribute("class");
-            }
-            this.setAttribute("class", "same-as-selected");
-            break;
-          }
-        }
-        h.click();
+      range.addEventListener("input", () => {
+        setBubble(range, bubble);
+      });
+      setBubble(range, bubble);
     });
-    b.appendChild(c);
-  }
-  x[i].appendChild(b);
-  a.addEventListener("click", function(e) {
-      /*when the select box is clicked, close any other select boxes,
-      and open/close the current select box:*/
-      e.stopPropagation();
-      closeAllSelect(this);
-      this.nextSibling.classList.toggle("select-hide");
-      this.classList.toggle("select-arrow-active");
-    });
-}
-function closeAllSelect(elmnt) {
-  /*a function that will close all select boxes in the document,
-  except the current select box:*/
-  var x, y, i, xl, yl, arrNo = [];
-  x = document.getElementsByClassName("select-items");
-  y = document.getElementsByClassName("select-selected");
-  xl = x.length;
-  yl = y.length;
-  for (i = 0; i < yl; i++) {
-    if (elmnt == y[i]) {
-      arrNo.push(i)
-    } else {
-      y[i].classList.remove("select-arrow-active");
-    }
-  }
-  for (i = 0; i < xl; i++) {
-    if (arrNo.indexOf(i)) {
-      x[i].classList.add("select-hide");
-    }
-  }
-}
-/*if the user clicks anywhere outside the select box,
-then close all select boxes:*/
-document.addEventListener("click", closeAllSelect);
-</script>
 
-</body>
-    <h3>The Trevor Project</h3>
-<p>The ultimate goal of The Trevor Project is to end suicide among LGBTQ people under 25 by providing them with counseling and education. It offers young people support with trained counselors via phone, text, and online chat. Every $1 donated allows people to get one more minute of counseling.</p>
-<h3>The National Immigration Law Center</h3>
-<p>This nonprofit has defended the rights of low-income immigrants in the US since 1979. It works to provide immigrants access to health care and fights unconstitutional immigration policy. The nonprofit also works to educate the public on the impact new laws would have on this marginalized group.</p>
-<h3>Human Rights Watch</h3>
-<p> Defending the rights of people across the globe is no small task, but the organization Human Rights Watch has been doing just this since 1978. About 400 journalists, attorneys, country experts, and many others work to publish non-partisan and independent reports every year on human rights conditions around the world.</p>
-<h3>The Global Fund for Women</h3>
-<p>The Global Fund for Women proudly calls itself and its supporters champions for equality. From setting up the first women’s fund in Nepal to funding secret schools in Afghanistan, this bold organization strives to empower women and girls around the world and ensure they are granted basic human rights.</p>
-<h3>Charity Water</h3>
-<p>According to charity: water, one in 10 people don’t have access to clean drinking water. The organization hopes to change these stats by bringing clean and safe drinking water to developing countries. It has already funded over 29,000 water projects around the world.</p>
-<h3>Mental Health America</h3>
-<p>Founded in 1909, Mental Health America helps Americans understand, prevent, and treat mental health issues that can interfere with their overall wellness and ability to live a healthy life. They also focus on educating Americans about mental health issues through their online hub of information and tools.</p>
-</html>
-{% else %}
+    function setBubble(range, bubble) {
+      const val = range.value;
+      const min = range.min ? range.min : 0;
+      const max = range.max ? range.max : 100;
+      const newVal = Number(((val - min) * 100) / (max - min));
+      bubble.innerHTML = val;
+      bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+    }
+
+    function joinSplits() {
+      var index = 1;
+      var charity = "charity" + index.toString();
+      var money_splits = "";
+      while (document.getElementById(charity) !== null) {
+        money_splits += document.getElementById(charity).value + ",";
+        $(charity).prop('disabled', true);
+        index++;
+        charity = "charity" + index.toString();
+      }
+      document.getElementById('id_money_splits').value = money_splits;
+
+    }
+    </script>
+  {% else %}
     <p>You aren't logged in.</p>
-{% endif %}
+  {% endif %}
+</div>
 
-
-{% endblock%}
+{% endblock content %}
