@@ -75,7 +75,7 @@ def pay(request):
         
         customer = stripe.Customer.create(
                 name= "george",
-                email="george@george.george"
+                email="george@george.george",
                 source=request.POST['stripeToken']
             )
 
