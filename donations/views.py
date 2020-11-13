@@ -34,7 +34,7 @@ def processSplits(splits_str):
     splits_strlst = splits_str.split(',')
     sum = 0
     splits = []
-    for i in range(len(splits_strlst)):
+    for i in range(len(splits_strlst) - 1):
         try:
             split = float(splits_strlst[i])
             if split > 0.00:
