@@ -7,6 +7,29 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+    .range-wrap {
+      position: relative;
+      width: 25%;
+    }
+    .range {
+      width: 100%;
+    }
+    .bubble {
+      background: #565554;
+      color: white;
+      padding: 4px;
+      position: absolute;
+      border-radius: 10px;
+      top: 1.5em;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .wrapper {
+      padding: 1em;
+    }
+    </style>
 
     <title>Project 1-34</title>
   </head>
@@ -33,7 +56,7 @@
 
     {% block content %}
 
-    {% endblock%}
+    {% endblock content %}
 
     <!-- Optional JavaScript; choose one of the two! -->
 
