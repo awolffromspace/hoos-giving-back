@@ -57,5 +57,5 @@ def volunteer(request):
     return render(request, 'donations/volunteer.html', {'form': form})
 
 def pay(request):
-    return None
+    return render(request, 'donations/pay.html')
 
