@@ -7,7 +7,6 @@
       <form action="/donations/volunteer/" method="post">
       	{% csrf_token %}
       	{{ form.as_p }}
-      	<p><b>Volunteer</b></p>
         {% for task in task_list %}
           <label for="task{{ forloop.counter }}">{{ task.name }}:</label>
           <p>{{ task.desc }}</p>
