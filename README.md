@@ -10,3 +10,9 @@ w3schools.com
 How TO-Hoverable Dropdown
 https://www.w3schools.com/howto/howto_css_dropdown.asp
 
+Youtube: Dennis Ivy
+Django Stripe Payments Simplified with Donation Page
+https://www.youtube.com/watch?v=oZwyA9lUwRk
+
+Stripe API Documentation
+https://stripe.com/docs/api
