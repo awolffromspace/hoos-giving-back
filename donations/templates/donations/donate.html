@@ -10,23 +10,27 @@
 
   <ul id="sliders">
     <li>
-      <div class="slider">20</div>
+      <div class="slider">16</div>
       <span class="value">0</span>%
     </li>
     <li>
-      <div class="slider">20</div>
+      <div class="slider">16</div>
       <span class="value" >0</span>%
     </li>
     <li>
-      <div class="slider">20</div>
+      <div class="slider">16</div>
       <span class="value">0</span>%
     </li>
     <li>
-      <div class="slider">20</div>
+      <div class="slider">16</div>
       <span class="value">0</span>%
     </li>
     <li>
-      <div class="slider">20</div>
+      <div class="slider">16</div>
+      <span class="value">0</span>%
+    </li>
+    <li>
+      <div class="slider">16</div>
       <span class="value">0</span>%
     </li>
   </ul>
@@ -60,7 +64,7 @@ sliders.each(function() {
         min: 0,
         max: availableTotal,
         range: "max",
-        step: 2,
+        step: 5,
         animate: 0,
         slide: function(event, ui) {
             $(this).siblings('.value').text(ui.value);
