@@ -71,7 +71,7 @@ def donate(request):
     return render(request, 'donations/donate.html', {'form': form, 'charity_list': charities})
 
 def volunteer(request):
-    tasks = Tasks.objects.all()
+    tasks = Task.objects.all()
     if request.method == 'POST':
         form = TimeDonationForm(request.POST)
         if form.is_valid():
