@@ -56,7 +56,6 @@ def donate(request):
             if splits[0] > -1 and len(splits) == len(charities):
                 donation.save()
                 for i in range(len(splits)):
-                    split = round(splits[i], 4)
                     if split > 0.00:
                         MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charities[i]).save()
             else:
@@ -77,8 +76,7 @@ def volunteer(request):
             if splits[0] > -1 and len(splits) == len(tasks_lst):
                 volunteer.save()
                 for i in range(len(splits)):
-                    split = round(splits[i], 4)
-                    TimeDonation(user=request.user, date_donated=timezone.now(), time_total=form.cleaned_data['time_total'], task=tasks_lst[i])
+                    TimeDonation(user=request.user, date_donated=timezone.now(), time_total=split, task=tasks_lst[i])
             else:
                 form = TimeDonationForm()
                 render(request, 'donations/volunteer.html', {'form': form})
