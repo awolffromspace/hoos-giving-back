@@ -58,7 +58,8 @@ def volunteer(request):
 
 def pay(request):
     amount = 1
-
+   
+    '''
     if request.method == 'POST':
         customer = stripe.Customer.create(
                 name=self.request.user,
@@ -71,6 +72,7 @@ def pay(request):
                 currency = "usd",
                 description = "Donation"
                 )
+                '''
 
     return render(request, 'donations/pay.html')
 
