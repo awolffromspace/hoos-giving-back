@@ -67,6 +67,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('charityLabel1').style.background-color = "black";
+    }, false);
+
     const allRanges = document.querySelectorAll(".range-wrap");
     allRanges.forEach(wrap => {
       const range = wrap.querySelector(".range");
@@ -120,10 +124,6 @@
 
       });
     });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('charityLabel1').style.background-color = "black";
-    }, false);
     </script>
   {% else %}
     <p>You aren't logged in.</p>
