@@ -121,9 +121,9 @@
       });
     });
 
-    $(document).ready(function() {
-      document.getElementById('id_charityLabel1').style.background-color = "black";
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('charityLabel1').style.background-color = "black";
+    }, false);
     </script>
   {% else %}
     <p>You aren't logged in.</p>
