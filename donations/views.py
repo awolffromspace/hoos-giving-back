@@ -48,6 +48,8 @@ def updateLevel(user):
         level = Level.objects.filter(
             user=user
         )
+        if not level:
+            Level(user=user, value=0)
         money_sum = 0
         time_sum = 0
         money_donations = MoneyDonation.objects.filter(
@@ -97,6 +99,7 @@ def volunteer(request):
                     if split > 0.00:
                         TimeDonation(user=request.user, date_donated=timezone.now(), time_total=timedelta(minutes=split), task=task).save()
                     index += 1
+                updateLevel(request.user)
             else:
                 form = TimeDonationForm()
                 render(request, 'donations/volunteer.html', {'form': form})
