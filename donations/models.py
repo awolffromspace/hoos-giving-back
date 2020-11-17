@@ -48,7 +48,20 @@ class TimeDonation(Donation):
     def __str__(self):
         return "{0} volunteered {1} minutes to do {2} at {3}".format(
             self.user.username,
-            int(self.time_total.total_seconds()),
+            int(self.time_total.total_seconds() / 60),
             self.task.name,
             self.date_donated.strftime("%I:%M %p on %b %d %y")
+        )
+
+class Level(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    value = models.IntegerField(default=1)
+
+    def __str__(self):
+        return "{0} is level {1}".format(
+            self.user.username,
+            self.value
         )
