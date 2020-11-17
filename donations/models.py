@@ -38,7 +38,7 @@ class MoneyDonation(Donation):
             self.user.username,
             self.money_total,
             self.charity.name,
-            self.date_donated
+            self.date_donated.strftime("%I:%M %p on %b %d %y")
         )
 
 class TimeDonation(Donation):
@@ -46,9 +46,9 @@ class TimeDonation(Donation):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{0} volunteered {1} to do {2} at {3}".format(
+        return "{0} volunteered {1} minutes to do {2} at {3}".format(
             self.user.username,
-            self.time_total,
+            int(self.time_total.total_seconds()),
             self.task.name,
-            self.date_donated
+            self.date_donated.strftime("%I:%M %p on %b %d %y")
         )

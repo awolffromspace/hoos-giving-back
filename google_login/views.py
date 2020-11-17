@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.contrib.auth import logout
+from django.shortcuts import redirect, render
 
-# Create your views here.
+def logout_request(request):
+    logout(request)
+    return redirect('https://project-1-34.herokuapp.com/')

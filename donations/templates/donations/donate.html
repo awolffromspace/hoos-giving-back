@@ -3,70 +3,47 @@
 
 <div class="wrapper">
   {% if user.is_authenticated %}
-    <form action="/donations/donate/" method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-
-      <label for="charity1" data-toggle="tooltip" data-placement="right" title="wanna learn more? click to check out their site 🐝", style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">The Trevor Project</label>
-      <p style = "letter-spacing: .25px;"><span style="font-weight:600; color: #EF476F;">The ultimate goal</span> of The Trevor Project is to end suicide among LGBTQ+ people under 25 by providing them with <span style="font-weight:600; color: #EF476F;">counseling</span> and <span style="font-weight:600; color: #EF476F;">education</span>. They offer young people support with trained counselors via <span style="font-weight:600; color: #EF476F;">phone, text,</span> and <span style="font-weight:600; color: #EF476F;">online chat.</span> Every $1 donated = 1 more minute of counseling!</p>
-      <div class="range-wrap">
-        <input type="range" class="range" link-to="charity1" min="0.00" max="100.00" step="0.01" value="0.00">
-        <output class="bubble"></output>
-      </div>
-      <br><br>
-      <b>$</b><input type="text" id="charity1"><br><br>
-
-      <label for="charity2", style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #1B9AAA; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;" >The National Immigration Law Center</label>
-      <p style = "letter-spacing: .25px;">The NLIC has <span style="font-weight:600; color: #1B9AAA;"> defended </span> the rights of low-income immigrants in the US since 1979. Working to provide <span style="font-weight:600; color: #1B9AAA;"> access to healthcare </span> and fight <span style="font-weight:600; color: #1B9AAA;"> unconstitutional immigration policy,</span> they also help <span style="font-weight:600; color: #1B9AAA;"> educate the public</span> on the impact of public policy on this marginalized community.</p>
-      <div class="range-wrap">
-        <input type="range" class="range" link-to="charity2" min="0.00" max="100.00" step="0.01" value="0.00">
-        <output class="bubble"></output>
-      </div>
-      <br><br>
-      <b>$</b><input type="text" id="charity2"><br><br>
-
-      <label for="charity3", style ="letter-spacing: .5px; color: #565554; font-weight: bold; background-color: #FFC43D; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">Human Rights Watch</label>
-      <p style = "letter-spacing: .25px;"><span style="font-weight:600; color: #FFC43D;">Defending the rights</span> of people across the globe is no small task, but Human Rights Watch has been doing just this since 1978. Over <span style="font-weight:600; color: #FFC43D;">400</span>  journalists, attorneys, country experts, and advocates work to publish <span style="font-weight:600; color: #FFC43D;">non-partisan</span> and <span style="font-weight:600; color: #FFC43D;">independent</span> reports every year on human rights conditions around the world.</p>
-      <div class="range-wrap">
-        <input type="range" class="range" link-to="charity3" min="0.00" max="100.00" step="0.01" value="0.00">
-        <output class="bubble"></output>
-      </div>
-      <br><br>
-      <b>$</b><input type="text" id="charity3"><br><br>
-
-      <label for="charity4", style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #06D6A0; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">The Global Fund for Women</label>
-      <p style = "letter-spacing: .25px;">The Global Fund for Women proudly calls itself and its supporters <span style="font-weight:600; color: #06D6A0;">champions for equality</span>. From setting up the first <span style="font-weight:600; color: #06D6A0;">women's fund</span> in Nepal to funding <span style="font-weight:600; color: #06D6A0;">secret schools</span> in Afghanistan, this bold organization strives to <span style="font-weight:600; color: #06D6A0;">empower women and girls</span> around the world and ensure they are granted basic human rights.</p>
-      <div class="range-wrap">
-        <input type="range" class="range" link-to="charity4" min="0.00" max="100.00" step="0.01" value="0.00">
-        <output class="bubble"></output>
-      </div>
-      <br><br>
-      <b>$</b><input type="text" id="charity4"><br><br>
-
-      <label for="charity5", style ="letter-spacing: .5px; color: #565554; font-weight: bold; background-color: #EECFAE; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">charity: water</label>
-      <p style = "letter-spacing: .25px;">According to charity: water, <span style="font-weight:600; color: #EECFAE;">1 in 10 people</span> don’t have access to clean drinking water. charity: water hopes to change these stats by bringing <span style="font-weight:600; color: #EECFAE;">clean</span> and <span style="font-weight:600; color: #EECFAE;">safe</span> drinking water to developing countries, already funding over <span style="font-weight:600; color: #EECFAE;">29,000 water projects</span> around the world.</p>
-      <div class="range-wrap">
-        <input type="range" class="range" link-to="charity5" min="0.00" max="100.00" step="0.01" value="0.00">
-        <output class="bubble"></output>
-      </div>
-      <br><br>
-      <b>$</b><input type="text" id="charity5"><br><br>
-
-      <label for="charity6", style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">Mental Health America</label>
-      <p style = "letter-spacing: .25px;">Founded in 1909, MHA helps Americans <span style="font-weight:600; color: #EF476F;">understand, prevent</span> and <span style="font-weight:600; color: #EF476F;">treat</span> mental health issues that can interfere with their overall wellness and ability to live a healthy life. They also focus on <span style="font-weight:600; color: #EF476F;">educating</span> Americans about mental health issues through their <span style="font-weight:600; color: #EF476F;">online hub</span> of information and tools.</p>
-      <div class="range-wrap">
-        <input type="range" class="range" link-to="charity6" min="0.00" max="100.00" step="0.01" value="0.00">
-        <output class="bubble"></output>
-      </div>
-      <br><br>
-      <b>$</b><input type="text" id="charity6"><br><br>
-      <input type="hidden" id="id_money_total">
-      <input type="submit" value="submit" class="btn btn-primary" onclick="joinSplits();" style = "letter-spacing: .5px;border: none; border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">
-    </form>
+    {% if charity_list %}
+      <form action="/donations/donate/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% for charity in charity_list %}
+          <!-- data-toggle="tooltip" data-placement="right" title="wanna learn more? click to check out their site 🐝" -->
+          <label id="charityLabel{{ forloop.counter }}" for="charity{{ forloop.counter }}" style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">{{ charity.name }}</label>
+          <p style = "letter-spacing: .25px;">{{ charity.desc }}</p>
+          <div class="range-wrap">
+            <input type="range" class="range" link-to="charity{{ forloop.counter }}" min="0.00" max="100.00" step="0.01" value="0.00">
+            <output class="bubble"></output>
+          </div>
+          <br><br>
+          <b>$</b> <input type="text" id="charity{{ forloop.counter }}"><br><br>
+        {% endfor %}
+        <input type="hidden" id="id_money_total">
+        <input type="submit" value="submit" class="btn btn-primary" onclick="joinSplits();" style = "letter-spacing: .5px;border: none; border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">
+      </form>
+    {% endif %}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var colors = ["#EF476F", "#1B9AAA", "#FFC43D", "#06D6A0", "#EECFAE"];
+      var index = 1;
+      var arrayIndex = 0;
+      var charityLabel = "charityLabel" + index.toString();
+      while (document.getElementById(charityLabel) !== null) {
+        document.getElementById(charityLabel).style.backgroundColor = colors[arrayIndex];
+        index++;
+        charityLabel = "charityLabel" + index.toString();
+        if (arrayIndex < 4) {
+          arrayIndex++;
+        } else {
+          arrayIndex = 0;
+        }
+      }
+      
+    }, false);
+
     const allRanges = document.querySelectorAll(".range-wrap");
     allRanges.forEach(wrap => {
       const range = wrap.querySelector(".range");

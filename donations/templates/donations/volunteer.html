@@ -8,23 +8,41 @@
       	{% csrf_token %}
       	{{ form.as_p }}
         {% for task in task_list %}
-          <label for="task{{ forloop.counter }}">{{ task.name }}:</label>
-          <p>{{ task.desc }}</p>
+          <label id="taskLabel{{ forloop.counter }}" for="task{{ forloop.counter }}" style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">{{ task.name }}</label>
+          <p style = "letter-spacing: .25px;">{{ task.desc }}</p>
           <div class="range-wrap">
             <input type="range" class="range" link-to="task{{ forloop.counter }}" min="0" max="1000" step="1" value="0">
             <output class="bubble"></output>
           </div>
           <br><br>
-          <input type="text" id="task{{ forloop.counter }}"><b>minutes</b><br><br>
+          <input type="text" id="task{{ forloop.counter }}"> <b>minutes</b><br><br>
         {% endfor %}
         <input type="hidden" id="id_time_total">
-        <input type="submit" value="Submit" class="btn btn-primary" onclick="joinSplits();">
+        <input type="submit" value="submit" class="btn btn-primary" onclick="joinSplits();" style = "letter-spacing: .5px;border: none; border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">
       </form>
     {% endif %}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var colors = ["#EF476F", "#1B9AAA", "#FFC43D", "#06D6A0", "#EECFAE"];
+      var index = 1;
+      var arrayIndex = 0;
+      var taskLabel = "taskLabel" + index.toString();
+      while (document.getElementById(taskLabel) !== null) {
+        document.getElementById(taskLabel).style.backgroundColor = colors[arrayIndex];
+        index++;
+        taskLabel = "taskLabel" + index.toString();
+        if (arrayIndex < 4) {
+          arrayIndex++;
+        } else {
+          arrayIndex = 0;
+        }
+      }
+      
+    }, false);
+
     const allRanges = document.querySelectorAll(".range-wrap");
     allRanges.forEach(wrap => {
       const range = wrap.querySelector(".range");
