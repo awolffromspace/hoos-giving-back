@@ -38,9 +38,7 @@ class MoneyDonation(Donation):
             self.user.username,
             self.money_total,
             self.charity.name,
-            "%I:%M %p on %b %d %y".format(
-                self.date_donated
-            )
+            self.date_donated.strftime("%I:%M %p on %b %d %y")
         )
 
 class TimeDonation(Donation):
@@ -52,7 +50,5 @@ class TimeDonation(Donation):
             self.user.username,
             self.time_total,
             self.task.name,
-            "%I:%M %p on %b %d %y".format(
-                self.date_donated
-            )
+            self.date_donated.strftime("%I:%M %p on %b %d %y")
         )
