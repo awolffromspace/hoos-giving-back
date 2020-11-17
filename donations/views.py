@@ -93,5 +93,5 @@ def submit_task(request):
             Task(name=form.cleaned_data['name'], body=form.cleaned_data['body']).save()
             return HttpResponseRedirect('/donations/volunteer/')
     else:
-        form = CommentForm()
+        form = TaskForm()
     return render(request, 'donations/task.html', {'form': form})
