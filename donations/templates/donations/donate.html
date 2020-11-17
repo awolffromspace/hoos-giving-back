@@ -10,7 +10,7 @@
         {% for charity in charity_list %}
           <!-- data-toggle="tooltip" data-placement="right" title="wanna learn more? click to check out their site 🐝" -->
           <label id="charityLabel{{ forloop.counter }}" for="charity{{ forloop.counter }}" style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">{{ charity.name }}</label>
-          <p style = "letter-spacing: .25px;">{{ task.desc }}</p>
+          <p style = "letter-spacing: .25px;">{{ charity.desc }}</p>
           <div class="range-wrap">
             <input type="range" class="range" link-to="charity{{ forloop.counter }}" min="0.00" max="100.00" step="0.01" value="0.00">
             <output class="bubble"></output>

@@ -17,18 +17,13 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         all_donations = MoneyDonation.objects.none()
-        if self.request.user.is_authenticated:
-            money_donations = MoneyDonation.objects.filter(
-                user=self.request.user
-            )
-            time_donations = TimeDonation.objects.filter(
-                user=self.request.user
-            )
-            all_donations = sorted(
-                chain(money_donations, time_donations),
-                key=attrgetter('date_donated'),
-                reverse = True
-            )
+        money_donations = MoneyDonation.objects.all()
+        time_donations = TimeDonation.objects.all()
+        all_donations = sorted(
+            chain(money_donations, time_donations),
+            key=attrgetter('date_donated'),
+            reverse=True
+        )
         return all_donations
 
 def processSplits(splits_str):
