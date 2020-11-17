@@ -1,0 +1,19 @@
+{% extends 'donations/base.html' %}
+{% block content %}
+<div class="wrapper">
+  {% if user.is_authenticated %}
+    <form action="/donations/task/" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_name">Task Name</label>
+        <input class="form-control" id="id_name" type="text" name="name" maxlength="200" required>
+      </div>
+      <div class="form-group">
+        <label for="id_desc">Task Description</label>
+        <textarea class="form-control" id="id_desc" rows="3" type="text" name="desc" maxlength="1000" required></textarea>
+      </div>
+      <input type="submit" value="submit" class="btn btn-primary" onclick="joinSplits();" style = "letter-spacing: .5px;border: none; border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">
+    </form>
+  {% endif %}
+</div>
+{% endblock content %}
