@@ -90,7 +90,7 @@ def submit_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            Task(name=form.cleaned_data['name'], body=form.cleaned_data['body']).save()
+            Task(name=form.cleaned_data['name'], desc=form.cleaned_data['desc']).save()
             return HttpResponseRedirect('/donations/volunteer/')
     else:
         form = TaskForm()
