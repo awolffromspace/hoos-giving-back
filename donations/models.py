@@ -32,23 +32,25 @@ class Donation(models.Model):
 class MoneyDonation(Donation):
     money_total = models.DecimalField(max_digits=8, decimal_places=2)
     charity = models.ForeignKey(Charity, on_delete=models.CASCADE)
+    formattedDate = "%I:%M %p on %b %d %y".format(self.date_donated)
 
     def __str__(self):
         return "{0} donated ${1} to {2} at {3}".format(
             self.user.username,
             self.money_total,
             self.charity.name,
-            self.date_donated
+            formattedDate
         )
 
 class TimeDonation(Donation):
     time_total = models.DurationField()
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    formattedDate = "%I:%M %p on %b %d %y".format(self.date_donated)
 
     def __str__(self):
         return "{0} volunteered {1} to do {2} at {3}".format(
             self.user.username,
             self.time_total,
             self.task.name,
-            self.date_donated
+            formattedDate
         )
