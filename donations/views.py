@@ -57,7 +57,7 @@ def updateLevel(user):
             user=user
         )
         for donation in money_donations:
-            money_sum = money_sum + donation.money_total
+            money_sum = money_sum + float(donation.money_total)
         for donation in time_donations:
             time_sum = time_sum + donation.time_total.total_seconds() / 60
         level.update(value=int(money_sum / 10 + time_sum / 100))
