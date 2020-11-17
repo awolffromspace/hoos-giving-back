@@ -18,7 +18,8 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('', include('google_login.urls')),
+    path('', TemplateView.as_view(template_name="google_login/index.html")),
+    path('logout/', include('google_login.urls')),
     path('donations/', include('donations.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
