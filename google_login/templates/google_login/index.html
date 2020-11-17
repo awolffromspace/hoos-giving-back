@@ -3,18 +3,22 @@
 
 {% block content %}
 
-<body>
-  {% if user.is_authenticated %}
+{% if user.is_authenticated %}
   <center style = "font-family: Helvetica; font-style: normal; font-weight: bold; color: #565554">hi {{ user.email }}!<br>
+    {% if level %}
+      {% with level|first as user_level %}
+        level: {{ user_level.value }}<br>
+      {% endwith %}
+    {% else %}
+      level: 1<br>
+    {% endif %}
     <a href="https://project-1-34.herokuapp.com/logout" style="font-family: Helvetica; font-style: normal; font-weight: bold;">log out</a>
   </center>
-  {% else %}
+{% else %}
   <div style="padding:25%;">
-  <center style = "font-family: Helvetica; font-style: normal; font-weight: bold; color: #565554">log in to explore how to help your cville community 😊</center>
-  <a href="{% provider_login_url 'google' %}" action = reauthenticate, style = "font-family: Helvetica; font-style: normal; font-weight: bold;"><center>click here</center></a>
+    <center style = "font-family: Helvetica; font-style: normal; font-weight: bold; color: #565554">log in to explore how to help your cville community 😊</center>
+    <a href="{% provider_login_url 'google' %}" action = reauthenticate, style = "font-family: Helvetica; font-style: normal; font-weight: bold;"><center>click here</center></a>
   </div>
-  {% endif %}
-  </body>
-</html>
+{% endif %}
 
 {% endblock%}
