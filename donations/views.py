@@ -7,7 +7,6 @@ from django.utils import timezone
 from django.views import generic
 from itertools import chain
 from operator import attrgetter
-import pytz
 
 from .forms import MoneyDonationForm, TimeDonationForm, TaskForm
 from .models import Charity, Task, MoneyDonation, TimeDonation, Level
@@ -69,7 +68,6 @@ def updateLevel(user):
 
 def donate(request):
     charities = Charity.objects.all()
-    timezone.activate(pytz.timezone('US/Eastern'))
     if request.method == 'POST':
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
@@ -79,7 +77,7 @@ def donate(request):
                 for charity in charities:
                     split = splits[index]
                     if split > 0.00:
-                        MoneyDonation(user=request.user, date_donated=timezone.localtime(timezone.now()), money_total=split, charity=charity).save()
+                        MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charity).save()
                     index += 1
                 updateLevel(request.user)
             else:
@@ -92,7 +90,6 @@ def donate(request):
 
 def volunteer(request):
     tasks = Task.objects.all()
-    timezone.activate(pytz.timezone('US/Eastern'))
     if request.method == 'POST':
         form = TimeDonationForm(request.POST)
         if form.is_valid():
@@ -102,7 +99,7 @@ def volunteer(request):
                 for task in tasks:
                     split = splits[index]
                     if split > 0.00:
-                        TimeDonation(user=request.user, date_donated=timezone.localtime(timezone.now()), time_total=timedelta(minutes=split), task=task).save()
+                        TimeDonation(user=request.user, date_donated=timezone.now(), time_total=timedelta(minutes=split), task=task).save()
                     index += 1
                 updateLevel(request.user)
             else:
