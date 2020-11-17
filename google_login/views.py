@@ -1,7 +1,6 @@
 from django.contrib.auth import logout
 from django.shortcuts import redirect, render
-from django.views.generic import TemplateView
 
 def logout_request(request):
     logout(request)
-    return redirect(TemplateView.as_view(template_name="index.html"))
+    return redirect('https://project-1-34.herokuapp.com/')
