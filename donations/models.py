@@ -38,7 +38,7 @@ class MoneyDonation(Donation):
             self.user.username,
             self.money_total,
             self.charity.name,
-            self.date_donated.strftime("%I:%M %p on %b %d %y")
+            self.date_donated.astimezone(pytz.timezone('US/Eastern')).strftime("%I:%M %p on %b %d %y")
         )
 
 class TimeDonation(Donation):
@@ -50,7 +50,7 @@ class TimeDonation(Donation):
             self.user.username,
             int(self.time_total.total_seconds() / 60),
             self.task.name,
-            self.date_donated.strftime("%I:%M %p on %b %d %y")
+            self.date_donated.astimezone(pytz.timezone('US/Eastern')).strftime("%I:%M %p on %b %d %y")
         )
 
 class Level(models.Model):
