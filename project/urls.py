@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from django.views.generic import TemplateView
+from google_login import views
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="google_login/index.html")),
+    path('', views.HomeView.as_view(), name='home'),
     path('logout/', include('google_login.urls')),
     path('donations/', include('donations.urls')),
     path('admin/', admin.site.urls),

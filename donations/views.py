@@ -48,9 +48,6 @@ def updateLevel(user):
         level = Level.objects.filter(
             user=user
         )
-        if not level:
-            level = Level(user=user, value=0)
-            level.save()
         money_sum = 0
         time_sum = 0
         money_donations = MoneyDonation.objects.filter(
@@ -63,7 +60,11 @@ def updateLevel(user):
             money_sum = money_sum + float(donation.money_total)
         for donation in time_donations:
             time_sum = time_sum + donation.time_total.total_seconds() / 60
-        level.update(value=int(money_sum / 10 + time_sum / 100))
+        value = int(money_sum / 10 + time_sum / 100)
+        if not level:
+            Level(user=user, value=value).save()
+        else:
+            level.update(value=value)
 
 def donate(request):
     charities = Charity.objects.all()
