@@ -34,12 +34,13 @@ class MoneyDonation(Donation):
     charity = models.ForeignKey(Charity, on_delete=models.CASCADE)
 
     def __str__(self):
-        formattedDate = "%I:%M %p on %b %d %y".format(self.date_donated)
         return "{0} donated ${1} to {2} at {3}".format(
             self.user.username,
             self.money_total,
             self.charity.name,
-            formattedDate
+            "%I:%M %p on %b %d %y".format(
+                self.date_donated
+            )
         )
 
 class TimeDonation(Donation):
@@ -47,10 +48,11 @@ class TimeDonation(Donation):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     def __str__(self):
-        formattedDate = "%I:%M %p on %b %d %y".format(self.date_donated)
         return "{0} volunteered {1} to do {2} at {3}".format(
             self.user.username,
             self.time_total,
             self.task.name,
-            formattedDate
+            "%I:%M %p on %b %d %y".format(
+                self.date_donated
+            )
         )
