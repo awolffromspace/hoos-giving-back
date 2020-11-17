@@ -68,6 +68,7 @@ def updateLevel(user):
 
 def donate(request):
     charities = Charity.objects.all()
+    timezone.activate(pytz.timezone('US/Eastern'))
     if request.method == 'POST':
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
@@ -90,6 +91,7 @@ def donate(request):
 
 def volunteer(request):
     tasks = Task.objects.all()
+    timezone.activate(pytz.timezone('US/Eastern'))
     if request.method == 'POST':
         form = TimeDonationForm(request.POST)
         if form.is_valid():
