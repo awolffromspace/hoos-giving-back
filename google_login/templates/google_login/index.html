@@ -7,10 +7,10 @@
   <center style = "font-family: Helvetica; font-style: normal; font-weight: bold; color: #565554">hi {{ user.email }}!<br>
     {% if level %}
       {% with level|first as user_level %}
-        level: {{ user_level.value }}<br>
+        your level: {{ user_level.value }}<br>
       {% endwith %}
     {% else %}
-      level: 1<br>
+      your level: 1<br>
     {% endif %}
     <a href="https://project-1-34.herokuapp.com/logout" style="font-family: Helvetica; font-style: normal; font-weight: bold;">log out</a>
   </center>
