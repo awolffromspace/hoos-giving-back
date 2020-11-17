@@ -8,7 +8,7 @@ from django.views import generic
 from itertools import chain
 from operator import attrgetter
 
-from .forms import MoneyDonationForm, TimeDonationForm
+from .forms import MoneyDonationForm, TimeDonationForm, TaskForm
 from .models import Charity, Task, MoneyDonation, TimeDonation
 
 class IndexView(generic.ListView):
@@ -91,7 +91,7 @@ def submit_task(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             Task(name=form.cleaned_data['name'], body=form.cleaned_data['body']).save()
-            return HttpResponseRedirect('/volunteer/')
+            return HttpResponseRedirect('/donations/volunteer/')
     else:
         form = CommentForm()
     return render(request, 'donations/task.html', {'form': form})
