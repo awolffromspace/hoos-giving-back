@@ -34,6 +34,7 @@
       while (document.getElementById(charityLabel) !== null) {
         document.getElementById(charityLabel).style.backgroundColor = colors[arrayIndex];
         index++;
+        charityLabel = "charity" + index.toString();
         if (arrayIndex < 4) {
           arrayIndex++;
         } else {
