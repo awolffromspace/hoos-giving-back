@@ -49,7 +49,7 @@ def updateLevel(user):
             user=user
         )
         if not level:
-            Level(user=user, value=0)
+            Level(user=user, value=0).save()
         money_sum = 0
         time_sum = 0
         money_donations = MoneyDonation.objects.filter(
