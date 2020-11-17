@@ -8,14 +8,14 @@
       	{% csrf_token %}
       	{{ form.as_p }}
         {% for task in task_list %}
-          <label id="taskLabel{{ forloop.counter }}" for="task{{ forloop.counter }}" style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">{{ task.name }}:</label>
+          <label id="taskLabel{{ forloop.counter }}" for="task{{ forloop.counter }}" style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">{{ task.name }}</label>
           <p style = "letter-spacing: .25px;">{{ task.desc }}</p>
           <div class="range-wrap">
             <input type="range" class="range" link-to="task{{ forloop.counter }}" min="0" max="1000" step="1" value="0">
             <output class="bubble"></output>
           </div>
           <br><br>
-          <input type="text" id="task{{ forloop.counter }}"><b>minutes</b><br><br>
+          <input type="text" id="task{{ forloop.counter }}"> <b>minutes</b><br><br>
         {% endfor %}
         <input type="hidden" id="id_time_total">
         <input type="submit" value="Submit" class="btn btn-primary" onclick="joinSplits();" style = "letter-spacing: .5px;border: none; border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">
