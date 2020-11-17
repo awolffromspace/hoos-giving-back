@@ -18,7 +18,7 @@ from django.urls import include, path
 from google_login import views
 
 urlpatterns = [
-    path('', views.HomeView.as_view(), name='home'),
+    path('', views.homepage, name='homepage'),
     path('logout/', include('google_login.urls')),
     path('donations/', include('donations.urls')),
     path('admin/', admin.site.urls),
