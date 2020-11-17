@@ -30,11 +30,11 @@
       var colors = ["#EF476F", "#1B9AAA", "#FFC43D", "#06D6A0", "#EECFAE"];
       var index = 1;
       var arrayIndex = 0;
-      var charityLabel = "charity" + index.toString();
+      var charityLabel = "charityLabel" + index.toString();
       while (document.getElementById(charityLabel) !== null) {
         document.getElementById(charityLabel).style.backgroundColor = colors[arrayIndex];
         index++;
-        charityLabel = "charity" + index.toString();
+        charityLabel = "charityLabel" + index.toString();
         if (arrayIndex < 4) {
           arrayIndex++;
         } else {
