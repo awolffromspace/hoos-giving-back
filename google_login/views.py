@@ -1,6 +1,7 @@
 from django.contrib.auth import logout
 from django.shortcuts import redirect, render
 from donations.models import Level
+from django.views import generic
 
 class HomeView(generic.DetailView):
     model = Level
