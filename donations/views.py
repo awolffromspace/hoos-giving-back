@@ -85,3 +85,13 @@ def volunteer(request):
     else:
         form = TimeDonationForm()
     return render(request, 'donations/volunteer.html', {'form': form, 'task_list': tasks})
+
+def submit_task(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            Task(name=form.cleaned_data['name'], body=form.cleaned_data['body']).save()
+            return HttpResponseRedirect('/volunteer/')
+    else:
+        form = CommentForm()
+    return render(request, 'donations/task.html', {'form': form})
