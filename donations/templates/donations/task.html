@@ -6,12 +6,12 @@
     <form action="/donations/task/" method="post">
       {% csrf_token %}
       <div class="form-group">
-        <label for="id_name">Title</label>
+        <label for="id_name">Task Name</label>
         <input class="form-control" id="id_name" type="text" name="name" maxlength="200" required>
       </div>
       <div class="form-group">
-        <label for="id_body">Description</label>
-        <textarea class="form-control" id="id_body" rows="3" type="text" name="body" maxlength="1000" required></textarea>
+        <label for="id_desc">Task Description</label>
+        <textarea class="form-control" id="id_desc" rows="3" type="text" name="desc" maxlength="1000" required></textarea>
       </div>
       <input type="submit" value="Submit" class="btn btn-primary">
     </form>
