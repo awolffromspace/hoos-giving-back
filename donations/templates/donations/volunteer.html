@@ -3,6 +3,7 @@
 
 <div class="wrapper">
   {% if user.is_authenticated %}
+    <p style = "letter-spacing: .25px;">Don't see a task related to your expertise? <a href="https://project-1-34.herokuapp.com/donations/task" style="font-family: Helvetica; font-style: normal; font-weight: bold;">Submit a new task!</a></p>
     {% if task_list %}
       <form action="/donations/volunteer/" method="post">
       	{% csrf_token %}
