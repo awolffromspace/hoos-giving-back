@@ -52,3 +52,16 @@ class TimeDonation(Donation):
             self.task.name,
             self.date_donated.strftime("%I:%M %p on %b %d %y")
         )
+
+class Level(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    value = models.IntegerField(default=1)
+
+    def __str__(self):
+        return "{0} is level {1}".format(
+            self.user.username,
+            self.value
+        )

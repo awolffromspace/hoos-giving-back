@@ -9,7 +9,7 @@ from itertools import chain
 from operator import attrgetter
 
 from .forms import MoneyDonationForm, TimeDonationForm, TaskForm
-from .models import Charity, Task, MoneyDonation, TimeDonation
+from .models import Charity, Task, MoneyDonation, TimeDonation, Level
 
 class IndexView(generic.ListView):
     template_name = 'donations/index.html'
@@ -43,6 +43,25 @@ def processSplits(splits_str):
         return [-1]
     return splits
 
+def updateLevel(user):
+    if user.is_authenticated:
+        level = Level.objects.filter(
+            user=user
+        )
+        money_sum = 0
+        time_sum = 0
+        money_donations = MoneyDonation.objects.filter(
+            user=user
+        )
+        time_donations = TimeDonation.objects.filter(
+            user=user
+        )
+        for donation in money_donations:
+            money_sum = money_sum + donation.money_total
+        for donation in time_donations:
+            time_sum = time_sum + donation.time_total.total_seconds() / 60
+        level.update(value=int(money_sum / 10 + time_sum / 100))
+
 def donate(request):
     charities = Charity.objects.all()
     if request.method == 'POST':
@@ -56,7 +75,7 @@ def donate(request):
                     if split > 0.00:
                         MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charity).save()
                     index += 1
-                    
+                updateLevel(request.user)
             else:
                 form = MoneyDonationForm()
                 render(request, 'donations/donate.html', {'form': form})
