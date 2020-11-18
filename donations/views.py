@@ -149,7 +149,7 @@ def pay(request):
     if request.method == 'POST':
         
         customer = stripe.Customer.create(
-                name=request.user.first_name + request.user.last_name,
+                name=request.user.first_name + " " + request.user.last_name,
                 email=request.user.email,
                 source=request.POST['stripeToken']
             )
