@@ -142,7 +142,7 @@ def pay(request):
     '''
 
 
-    amount = 1
+    amount = request.COOKIES['donation_total']
    
     
     if request.method == 'POST':
@@ -155,7 +155,7 @@ def pay(request):
 
         charge = stripe.Charge.create(
                 customer=customer,
-                amount = 666,
+                amount = amount,
                 currency = "usd",
                 description = "Donation"
                 )
