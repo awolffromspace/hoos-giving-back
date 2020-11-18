@@ -36,7 +36,9 @@ class MoneyDonation(Donation):
     charity = models.ForeignKey(Charity, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{0} donated ${1} to {2} at {3}".format(
+        level = Level.objects.filter(user=self.user).first().value
+        return "Level {0} user {1} donated ${2} to {3} at {4}".format(
+            level,
             self.user.username,
             self.money_total,
             self.charity.name,
@@ -48,7 +50,9 @@ class TimeDonation(Donation):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{0} volunteered {1} minutes to do {2} at {3}".format(
+        level = Level.objects.filter(user=self.user).first().value
+        return "Level {0} user {1} volunteered {2} minutes to do {3} at {4}".format(
+            level,
             self.user.username,
             int(self.time_total.total_seconds() / 60),
             self.task.name,
@@ -56,9 +60,10 @@ class TimeDonation(Donation):
         )
 
 class Level(models.Model):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        primary_key=True,
     )
     value = models.IntegerField(default=1)
 
