@@ -10,5 +10,5 @@ class TimeDonationForm(forms.Form):
     time_splits = forms.CharField(label='Volunteer Splits', widget=forms.HiddenInput())
 
 class TaskForm(forms.Form):
-    name = forms.CharField(label='Task Name', max_length=200)
-    desc = forms.CharField(label='Task Description', max_length=1000, widget=forms.Textarea)
+    name = forms.CharField(label='Task Name', max_length=50)
+    desc = forms.CharField(label='Task Description', max_length=500, widget=forms.Textarea)

@@ -3,8 +3,8 @@ from django.db import models
 import pytz
 
 class Charity(models.Model):
-    name = models.CharField(max_length=200, default='')
-    desc = models.CharField(max_length=1000, default='')
+    name = models.CharField(max_length=50, default='')
+    desc = models.CharField(max_length=500, default='')
 
     def __str__(self):
         return "{0}".format(
@@ -12,8 +12,8 @@ class Charity(models.Model):
         )
 
 class Task(models.Model):
-    name = models.CharField(max_length=200, default='')
-    desc = models.CharField(max_length=1000, default='')
+    name = models.CharField(max_length=50, default='')
+    desc = models.CharField(max_length=500, default='')
 
     def __str__(self):
         return "{0}".format(
@@ -31,7 +31,7 @@ class Donation(models.Model):
         abstract = True
 
 class MoneyDonation(Donation):
-    money_total = models.DecimalField(max_digits=8, decimal_places=2)
+    money_total = models.DecimalField(max_digits=11, decimal_places=2)
     charity = models.ForeignKey(Charity, on_delete=models.CASCADE)
 
     def __str__(self):

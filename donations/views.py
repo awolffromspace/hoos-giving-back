@@ -35,11 +35,13 @@ def processSplits(splits_str):
     for i in range(len(splits_strlst)):
         try:
             split = float(splits_strlst[i])
+            if split < 0.00:
+                return [-1]
             splits.append(split)
             sum += split
         except ValueError:
             return [-1]
-    if sum < 0.01 or sum > 999999.99:
+    if sum < 0.01 or sum > 999999999.99:
         return [-1]
     return splits
 
