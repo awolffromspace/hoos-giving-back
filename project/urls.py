@@ -19,7 +19,7 @@ from google_login import views
 
 urlpatterns = [
     path('', views.homepage, name='homepage'),
-    path('logout/', include('google_login.urls')),
+    path('logout/', views.logout_request, name='logout'),
     path('donations/', include('donations.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
