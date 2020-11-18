@@ -1,4 +1,5 @@
 import datetime
+import stripe
 
 from datetime import timedelta
 from django.http import HttpResponseRedirect
@@ -10,6 +11,8 @@ from operator import attrgetter
 
 from .forms import MoneyDonationForm, TimeDonationForm, TaskForm
 from .models import Charity, Task, MoneyDonation, TimeDonation, Level
+
+stripe.api_key = "sk_test_51Hmsn6A6a6h8LgDy02KZ3YjlftIk89TbokiSyGJ2GPGZ6LUN4bFFnpBMa2ONGXwH4U09yxy4KIdpd9G6MF7ATWkh007YmN3paT"
 
 class IndexView(generic.ListView):
     template_name = 'donations/index.html'
@@ -85,7 +88,7 @@ def donate(request):
             else:
                 form = MoneyDonationForm()
                 render(request, 'donations/donate.html', {'form': form})
-            return HttpResponseRedirect('/donations/')
+            return HttpResponseRedirect('/donations/pay/')
     else:
         form = MoneyDonationForm()
     return render(request, 'donations/donate.html', {'form': form, 'charity_list': charities})
@@ -121,3 +124,42 @@ def submit_task(request):
     else:
         form = TaskForm()
     return render(request, 'donations/task.html', {'form': form})
+
+def pay(request):
+
+    '''
+    How to fix me:
+    - Need to somehow take in donation amount from last page
+        -This needs to be an int, in penies. Replace the value assigned to amount in charge.
+
+    - Need to have a name/email for customer (a string)... unsure how to get it using google login
+        -these variables are found in customer
+
+    - The donation should not be recorded on the app until after payment is given
+        - somehow this view probably needs to be passed the information on the charge and finalize it;
+          this probably should be done after the charge var because then the payment should have gone through
+        - and it might look a bit nicer if we can show a little info at the checkout page, too. Like at least the amount
+    '''
+
+
+    amount = 1
+   
+    
+    if request.method == 'POST':
+        
+        customer = stripe.Customer.create(
+                name= "george",
+                email="george@george.george",
+                source=request.POST['stripeToken']
+            )
+
+        charge = stripe.Charge.create(
+                customer=customer,
+                amount = 666,
+                currency = "usd",
+                description = "Donation"
+                )
+
+        return HttpResponseRedirect('/donations/')
+
+    return render(request, 'donations/pay.html')

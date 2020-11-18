@@ -13,3 +13,10 @@ https://css-tricks.com/value-bubbles-for-range-inputs/
 Shergold, Remi.
 Range (Slider) Style & Text Box Linking.
 https://cssdeck.com/labs/input-range-slider-style-and-text-box-link
+
+Youtube: Dennis Ivy
+Django Stripe Payments Simplified with Donation Page
+https://www.youtube.com/watch?v=oZwyA9lUwRk
+
+Stripe API Documentation
+https://stripe.com/docs/api
