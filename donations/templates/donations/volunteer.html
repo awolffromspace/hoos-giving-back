@@ -18,7 +18,6 @@
           <br><br>
           <input type="text" id="task{{ forloop.counter }}"> <b>minutes</b><br><br>
         {% endfor %}
-        <input type="hidden" id="id_time_total">
         <input type="submit" value="submit" class="btn btn-primary" onclick="joinSplits();" style = "letter-spacing: .5px;border: none; border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">
       </form>
     {% endif %}
@@ -67,16 +66,13 @@
     function joinSplits() {
       var index = 1;
       var task = "task" + index.toString();
-      var time_total = 0;
       var time_splits = "";
       while (document.getElementById(task) !== null) {
-        time_total += document.getElementById(task).value;
         time_splits += document.getElementById(task).value + ",";
         $(task).prop('disabled', true);
         index++;
         task = "task" + index.toString();
       }
-      document.getElementById('id_time_total').value = time_total;
       document.getElementById('id_time_splits').value = time_splits;
     }
 
