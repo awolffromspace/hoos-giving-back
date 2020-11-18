@@ -51,7 +51,8 @@ class TimeDonation(Donation):
 
     def __str__(self):
         level = Level.objects.filter(user=self.user).first().value
-        return "{1} volunteered {2} minutes to do {3} at {4}".format(
+        return "Level {0} user {1} volunteered {2} minutes to do {3} at {4}".format(
+            level,
             self.user.username,
             int(self.time_total.total_seconds() / 60),
             self.task.name,
