@@ -142,8 +142,9 @@ def pay(request):
     '''
 
 
-    amount = request.COOKIES['donation_total']
-   
+    amount = 0
+    if 'donation_total' in request.COOKIES:
+        amount = round(float(request.COOKIES['donation_total']), 2)
     
     if request.method == 'POST':
         
