@@ -18,7 +18,6 @@
           <br><br>
           <b>$</b> <input type="text" id="charity{{ forloop.counter }}"><br><br>
         {% endfor %}
-        <input type="hidden" id="id_money_total">
         <input type="submit" value="submit" class="btn btn-primary" onclick="joinSplits();" style = "letter-spacing: .5px;border: none; border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">
       </form>
     {% endif %}
@@ -67,16 +66,16 @@
     function joinSplits() {
       var index = 1;
       var charity = "charity" + index.toString();
-      var money_total = 0;
+      var money_total = 0.00;
       var money_splits = "";
       while (document.getElementById(charity) !== null) {
-        money_total += document.getElementById(charity).value;
+        money_total += parseFloat(document.getElementById(charity).value);
         money_splits += document.getElementById(charity).value + ",";
         $(charity).prop('disabled', true);
         index++;
         charity = "charity" + index.toString();
       }
-      document.getElementById('id_money_total').value = money_total;
+      document.cookie = "donation_total=" + money_total.toString() + ";domain=.project-1-34.herokuapp.com;path=/";
       document.getElementById('id_money_splits').value = money_splits;
     }
 
