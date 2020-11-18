@@ -144,13 +144,13 @@ def pay(request):
 
     amount = 0
     if 'donation_total' in request.COOKIES:
-        amount = round(float(request.COOKIES['donation_total']), 2)
+        amount = round(float(request.COOKIES['donation_total']), 2) * 100
     
     if request.method == 'POST':
         
         customer = stripe.Customer.create(
-                name= "george",
-                email="george@george.george",
+                name=request.user.first_name + request.user.last_name,
+                email=request.user.email,
                 source=request.POST['stripeToken']
             )
 
