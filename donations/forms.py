@@ -4,13 +4,11 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 class MoneyDonationForm(forms.Form):
-    money_total = forms.DecimalField(label='Money Total (USD)', max_digits=8, decimal_places=2, min_value=Decimal('0.01'))
+    money_splits = forms.CharField(label='Donation Splits', widget=forms.HiddenInput())
 
 class TimeDonationForm(forms.Form):
-    time_total = forms.DurationField(label='Time Total (s)')
+    time_splits = forms.CharField(label='Volunteer Splits', widget=forms.HiddenInput())
 
-    def clean_time_total(self):
-        data = self.cleaned_data['time_total']
-        if data <= timedelta(0):
-            raise ValidationError("Ensure this value is positive.")
-        return data
+class TaskForm(forms.Form):
+    name = forms.CharField(label='Task Name', max_length=50)
+    desc = forms.CharField(label='Task Description', max_length=500, widget=forms.Textarea)

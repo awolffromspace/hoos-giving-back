@@ -1,5 +1,25 @@
+import pytz
+
 from django.conf import settings
 from django.db import models
+
+class Charity(models.Model):
+    name = models.CharField(max_length=50, default='')
+    desc = models.CharField(max_length=500, default='')
+
+    def __str__(self):
+        return "{0}".format(
+            self.name
+        )
+
+class Task(models.Model):
+    name = models.CharField(max_length=50, default='')
+    desc = models.CharField(max_length=500, default='')
+
+    def __str__(self):
+        return "{0}".format(
+            self.name
+        )
 
 class Donation(models.Model):
     user = models.ForeignKey(
@@ -12,21 +32,38 @@ class Donation(models.Model):
         abstract = True
 
 class MoneyDonation(Donation):
-    money_total = models.DecimalField(max_digits=8, decimal_places=2)
+    money_total = models.DecimalField(max_digits=11, decimal_places=2)
+    charity = models.ForeignKey(Charity, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{0} donated ${1} at {2}".format(
+        return "{0} donated ${1} to {2} at {3}".format(
             self.user.username,
             self.money_total,
-            self.date_donated
+            self.charity.name,
+            self.date_donated.astimezone(pytz.timezone('US/Eastern')).strftime("%I:%M %p on %b %d %y")
         )
 
 class TimeDonation(Donation):
     time_total = models.DurationField()
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{0} volunteered {1} time at {2}".format(
+        return "{0} volunteered {1} minutes to do {2} at {3}".format(
             self.user.username,
-            self.time_total,
-            self.date_donated
+            int(self.time_total.total_seconds() / 60),
+            self.task.name,
+            self.date_donated.astimezone(pytz.timezone('US/Eastern')).strftime("%I:%M %p on %b %d %y")
+        )
+
+class Level(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    value = models.IntegerField(default=1)
+
+    def __str__(self):
+        return "{0} is level {1}".format(
+            self.user.username,
+            self.value
         )

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+    .range-wrap {
+      position: relative;
+      width: 25%;
+    }
+    .range {
+      width: 100%;
+    }
+    .bubble {
+      background: #565554;
+      color: white;
+      padding: 4px;
+      position: absolute;
+      border-radius: 10px;
+      top: 1.5em;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .wrapper {
+      padding: 1em;
+      font-family: Helvetica;
+      color: #565554;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .tooltip {
+      font-family: Helvetica;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .tooltip-inner {
+      background-color: #EECFAE !important;
+      color: white;
+    }
+    .bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^="top"] .arrow::before {
+      border-top-color: #EECFAE !important;
+    }
+
+    .bs-tooltip-right .arrow::before, .bs-tooltip-auto[x-placement^="right"] .arrow::before {
+      border-right-color: #EECFAE !important;
+    }
+
+   .bs-tooltip-bottom .arrow::before, .bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
+    border-bottom-color: #EECFAE !important;
+   }
+
+  .bs-tooltip-left .arrow::before, .bs-tooltip-auto[x-placement^="left"] .arrow::before {
+    border-left-color: #EECFAE !important;
+  }
+
+
+    </style>
+
+    <title>Project 1-34</title>
+  </head>
+  <body>
+    <!-- Just an image -->
+  <nav class="navbar navbar-light", style="background-color: #FFC43D;">
+    <a class="navbar-brand" href="https://project-1-34.herokuapp.com/", style = "display: flex; justify-content: center; width: 100%; left: 0;">
+      <img src="https://i.imgur.com/lbJWmPy.png" width="236" height="45" alt="" loading="lazy">
+    </a>
+  </nav>
+
+
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups", style = "margin: auto;display: flex;flex-direction: row;justify-content: center;margin-top: 15px;margin-bottom: 15px">
+      <div class="btn-group mr-3" role="group" aria-label="First group">
+        <a class="btn btn-primary" href="/donations/donate" role="button", style = "letter-spacing: .5px;border: none; background-color: #06D6A0;border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">donate</a>
+    </div>
+    <div class="btn-group mr-3" role="group" aria-label="Second group">
+        <a class="btn btn-primary" href="/donations" role="button", style = "letter-spacing: .5px;border: none; background-color: #EF476F; border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">feed</a>
+    </div>
+    <div class="btn-group" role="group" aria-label="Third group">
+        <a class="btn btn-primary" href="/donations/volunteer" role="button", style = "letter-spacing: .5px;border: none; background-color: #1B9AAA;border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">volunteer</a>
+    </div>
+    </div>
+
+    {% block content %}
+
+    {% endblock content %}
+    <script>
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

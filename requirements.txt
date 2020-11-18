@@ -2,4 +2,5 @@ Django
 gunicorn
 django-heroku
 django-allauth
+pytz
 stripe

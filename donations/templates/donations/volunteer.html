@@ -1,11 +1,106 @@
-<h1>Volunteer</h1>
-<p><a href="../..">Home</a> • <a href="..">Feed</a> • <a href="../donate">Donate</a></p>
-{% if user.is_authenticated %}
-    <form action="/donations/volunteer/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
-    </form>
-{% else %}
+{% extends 'donations/base.html' %}
+{% block content %}
+
+<div class="wrapper">
+  {% if user.is_authenticated %}
+    <p style = "letter-spacing: .25px;">Don't see a task related to your expertise? <a href="https://project-1-34.herokuapp.com/donations/task" style="font-family: Helvetica; font-style: normal; font-weight: bold;">Submit a new task!</a></p>
+    {% if task_list %}
+      <form action="/donations/volunteer/" method="post">
+      	{% csrf_token %}
+      	{{ form.as_p }}
+        {% for task in task_list %}
+          <label id="taskLabel{{ forloop.counter }}" for="task{{ forloop.counter }}" style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">{{ task.name }}</label>
+          <p style = "letter-spacing: .25px;">{{ task.desc }}</p>
+          <div class="range-wrap">
+            <input type="range" class="range" link-to="task{{ forloop.counter }}" min="0" max="1000" step="1" value="0">
+            <output class="bubble"></output>
+          </div>
+          <br><br>
+          <input type="text" id="task{{ forloop.counter }}"> <b>minutes</b><br><br>
+        {% endfor %}
+        <input type="hidden" id="id_time_total">
+        <input type="submit" value="submit" class="btn btn-primary" onclick="joinSplits();" style = "letter-spacing: .5px;border: none; border-radius: 40px;font-family: Helvetica; font-style: normal; font-weight: bold;">
+      </form>
+    {% endif %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var colors = ["#EF476F", "#1B9AAA", "#FFC43D", "#06D6A0", "#EECFAE"];
+      var index = 1;
+      var arrayIndex = 0;
+      var taskLabel = "taskLabel" + index.toString();
+      while (document.getElementById(taskLabel) !== null) {
+        document.getElementById(taskLabel).style.backgroundColor = colors[arrayIndex];
+        index++;
+        taskLabel = "taskLabel" + index.toString();
+        if (arrayIndex < 4) {
+          arrayIndex++;
+        } else {
+          arrayIndex = 0;
+        }
+      }
+      
+    }, false);
+
+    const allRanges = document.querySelectorAll(".range-wrap");
+    allRanges.forEach(wrap => {
+      const range = wrap.querySelector(".range");
+      const bubble = wrap.querySelector(".bubble");
+
+      range.addEventListener("input", () => {
+        setBubble(range, bubble);
+      });
+      setBubble(range, bubble);
+    });
+
+    function setBubble(range, bubble) {
+      const val = range.value;
+      const min = range.min ? range.min : 0;
+      const max = range.max ? range.max : 100;
+      const newVal = Number(((val - min) * 100) / (max - min));
+      bubble.innerHTML = val;
+      bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+    }
+
+    function joinSplits() {
+      var index = 1;
+      var task = "task" + index.toString();
+      var time_total = 0;
+      var time_splits = "";
+      while (document.getElementById(task) !== null) {
+        time_total += document.getElementById(task).value;
+        time_splits += document.getElementById(task).value + ",";
+        $(task).prop('disabled', true);
+        index++;
+        task = "task" + index.toString();
+      }
+      document.getElementById('id_time_total').value = time_total;
+      document.getElementById('id_time_splits').value = time_splits;
+    }
+
+    $(function() {
+      $('input').filter( function(){return this.type == 'range' } ).each(function(){  
+        var $slider = $(this),
+          $text_box = $('#'+$(this).attr('link-to'));
+        
+        $text_box.val(this.value);
+        
+        $slider.change(function(){
+          $text_box.val(this.value);
+        });
+        
+        $text_box.change(function(){
+          $slider.val($text_box.val());
+        });
+
+      });
+    });
+    </script>
+  {% else %}
     <p>You aren't logged in.</p>
-{% endif %}
+  {% endif %}
+</div>
+
+{% endblock content %}
