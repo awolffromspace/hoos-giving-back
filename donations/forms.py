@@ -12,4 +12,4 @@ class TimeDonationForm(forms.Form):
 class TaskForm(forms.Form):
     name = forms.CharField(label='Task Name', max_length=50)
     desc = forms.CharField(label='Task Description', max_length=500, widget=forms.Textarea)
-    goal = forms.DurationField(label='Task Goal')
+    goal = forms.CharField(label='Task Goal')
