@@ -119,8 +119,9 @@ def volunteer(request):
                     updated_goal = task.goal - split
                     if (updated_goal <= 0):
                         updated_goal = 0
-                        task.update(fulfilled=True)
-                    task.update(goal=updated_goal)
+                        task.fulfilled = True
+                    task.goal = updated_goal
+                    task.save()
                 update_level(request.user)
                 return HttpResponseRedirect('/donations/')
             else:
