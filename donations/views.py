@@ -54,7 +54,7 @@ def process_splits(splits_str):
         try:
             split = float(splits_strlst[i])
             if split < 0.00:
-                return [-1]
+                return [-1], sum
             splits.append(split)
             sum += split
         except ValueError:
