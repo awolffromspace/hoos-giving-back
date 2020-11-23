@@ -174,6 +174,7 @@ def pay(request):
                 )
 
         charities = Charity.objects.all()
+        splits = request.session['donation_splits']
         index = 0
         for charity in charities:
             split = splits[index]
