@@ -36,8 +36,9 @@
         {% for task in task_list %}
           <label id="taskLabel{{ forloop.counter }}" for="task{{ forloop.counter }}" style ="letter-spacing: .5px; color: white; font-weight: bold; background-color: #EF476F; border-radius: 20px; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">{{ task.name }}</label>
           <p style = "letter-spacing: .25px;">{{ task.desc }}</p>
+          <p style = "letter-spacing: .25px;"><b>Goal (minutes):</b> {{ task.goal }}</p>
           <div class="range-wrap">
-            <input type="range" class="range" link-to="task{{ forloop.counter }}" min="0" max="300" step="1" value="0">
+            <input type="range" class="range" link-to="task{{ forloop.counter }}" min="0" max="{{ task.goal }}" step="1" value="0">
             <output class="bubble"></output>
           </div>
           <br><br>

@@ -15,10 +15,8 @@
 # *  Software License: N/A
 # ***************************************************************************************/
 
-import datetime
 import stripe
 
-from datetime import timedelta
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils import timezone
@@ -46,7 +44,7 @@ class IndexView(generic.ListView):
         )
         return all_donations
 
-def processSplits(splits_str):
+def process_splits(splits_str):
     if splits_str.endswith(','):
         splits_str = splits_str[0 : len(splits_str) - 1]
     splits_strlst = splits_str.split(',')
@@ -65,7 +63,7 @@ def processSplits(splits_str):
         return [-1]
     return splits, sum
 
-def updateLevel(user):
+def update_level(user):
     if user.is_authenticated:
         level = Level.objects.filter(
             user=user
@@ -81,7 +79,7 @@ def updateLevel(user):
         for donation in money_donations:
             money_sum = money_sum + float(donation.money_total)
         for donation in time_donations:
-            time_sum = time_sum + donation.time_total.total_seconds() / 60
+            time_sum = time_sum + donation.time_total
         value = 1 + int(money_sum / 10 + time_sum / 30)
         if not level:
             Level(user=user, value=value).save()
@@ -93,36 +91,42 @@ def donate(request):
     if request.method == 'POST':
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
-            splits, sum = processSplits(form.cleaned_data['money_splits'])
+            splits, sum = process_splits(form.cleaned_data['money_splits'])
             if splits[0] > -1:
                 request.session['donation_splits'] = splits
                 request.session['donation_total'] = sum
                 return HttpResponseRedirect('/donations/pay/')
             else:
                 form = MoneyDonationForm()
-                render(request, 'donations/donate.html', {'form': form})
+                return render(request, 'donations/donate.html', {'form': form, 'charity_list': charities})
     else:
         form = MoneyDonationForm()
     return render(request, 'donations/donate.html', {'form': form, 'charity_list': charities})
 
 def volunteer(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(fulfilled=False)
     if request.method == 'POST':
         form = TimeDonationForm(request.POST)
         if form.is_valid():
-            splits = processSplits(form.cleaned_data['time_splits'])
+            splits, sum = process_splits(form.cleaned_data['time_splits'])
             if splits[0] > -1:
                 index = 0
                 for task in tasks:
                     split = splits[index]
                     if split > 0.00:
-                        TimeDonation(user=request.user, date_donated=timezone.now(), time_total=timedelta(minutes=split), task=task).save()
+                        TimeDonation(user=request.user, date_donated=timezone.now(), time_total=split, task=task).save()
                     index += 1
-                updateLevel(request.user)
+                    updated_goal = task.goal - split
+                    if (updated_goal <= 0):
+                        updated_goal = 0
+                        task.fulfilled = True
+                    task.goal = updated_goal
+                    task.save()
+                update_level(request.user)
                 return HttpResponseRedirect('/donations/')
             else:
                 form = TimeDonationForm()
-                render(request, 'donations/volunteer.html', {'form': form})
+                return render(request, 'donations/volunteer.html', {'form': form, 'task_list': tasks})
     else:
         form = TimeDonationForm()
     return render(request, 'donations/volunteer.html', {'form': form, 'task_list': tasks})
@@ -131,8 +135,12 @@ def submit_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            Task(name=form.cleaned_data['name'], desc=form.cleaned_data['desc']).save()
-            return HttpResponseRedirect('/donations/volunteer/')
+            try:
+                goal = int(form.cleaned_data['goal'])
+                Task(name=form.cleaned_data['name'], desc=form.cleaned_data['desc'], goal=goal).save()
+                return HttpResponseRedirect('/donations/volunteer/')
+            except:
+                return render(request, 'donations/task.html', {'form': form})
     else:
         form = TaskForm()
     return render(request, 'donations/task.html', {'form': form})
@@ -181,7 +189,7 @@ def pay(request):
             if split > 0.00:
                 MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charity).save()
             index += 1
-        updateLevel(request.user)
+        update_level(request.user)
 
         return HttpResponseRedirect('/donations/')
 
