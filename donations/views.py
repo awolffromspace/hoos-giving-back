@@ -63,7 +63,7 @@ def processSplits(splits_str):
             return [-1]
     if sum < 0.01 or sum > 999999999.99:
         return [-1]
-    return splits
+    return splits, sum
 
 def updateLevel(user):
     if user.is_authenticated:
@@ -93,7 +93,14 @@ def donate(request):
     if request.method == 'POST':
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
-            return HttpResponseRedirect('/donations/pay/')
+            splits, sum = processSplits(form.cleaned_data['money_splits'])
+            if splits[0] > -1:
+                request.session['donation_splits'] = splits
+                request.session['donation_total'] = sum
+                return HttpResponseRedirect('/donations/pay/')
+            else:
+                form = MoneyDonationForm()
+                render(request, 'donations/donate.html', {'form': form})
     else:
         form = MoneyDonationForm()
     return render(request, 'donations/donate.html', {'form': form, 'charity_list': charities})
@@ -112,10 +119,10 @@ def volunteer(request):
                         TimeDonation(user=request.user, date_donated=timezone.now(), time_total=timedelta(minutes=split), task=task).save()
                     index += 1
                 updateLevel(request.user)
+                return HttpResponseRedirect('/donations/')
             else:
                 form = TimeDonationForm()
                 render(request, 'donations/volunteer.html', {'form': form})
-            return HttpResponseRedirect('/donations/')
     else:
         form = TimeDonationForm()
     return render(request, 'donations/volunteer.html', {'form': form, 'task_list': tasks})
@@ -149,7 +156,7 @@ def pay(request):
 
     amount = 0
     if 'donation_total' in request.COOKIES:
-        amount = int(float(request.COOKIES['donation_total']) * 100)
+        amount = int(float(request.session['donation_total']) * 100)
     
     if request.method == 'POST':
         
@@ -167,7 +174,7 @@ def pay(request):
                 )
 
         charities = Charity.objects.all()
-        splits = processSplits(request.COOKIES['donation_splits'])
+        splits = processSplits(request.session['donation_splits'])
         if splits[0] > -1:
             index = 0
             for charity in charities:
