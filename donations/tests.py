@@ -1,8 +1,13 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.utils import timezone
 
 from .forms import MoneyDonationForm, TimeDonationForm, TaskForm
+from .models import Charity, Task, MoneyDonation, TimeDonation, Level
 from . import views
+
+# self.user = User.objects.create_user(username='testuser', password='12345')
+# login = self.client.login(username='testuser', password='12345')
 
 class MoneyDonationFormTests(TestCase):
     def test_equivalence(self):
@@ -35,7 +40,62 @@ class TaskFormTests(TestCase):
         form = TaskForm(data={'name': '', 'desc': '', 'goal': ''})
         self.assertFalse(form.is_valid())
 
-class process_splitsTests(TestCase):
+class UpdateLevelTests(TestCase):
+    def test_equivalence1(self):
+        self.user = User.objects.create_user(username='testuser', password='1234')
+        views.update_level(self.user)
+        level = Level.objects.filter(user=self.user).first().value
+        self.assertTrue(level == 1)
+
+    def test_equivalence2(self):
+        self.user = User.objects.create_user(username='testuser', password='1234')
+        charity = Charity(name="Charity Name", desc="Charity Description")
+        charity.save()
+        MoneyDonation(user=self.user, date_donated=timezone.now(), money_total=15.00, charity=charity).save()
+        task = Task(name="Task Name", desc="Task Description", goal=60)
+        task.save()
+        TimeDonation(user=self.user, date_donated=timezone.now(), time_total=40, task=task).save()
+        views.update_level(self.user)
+        level = Level.objects.filter(user=self.user).first().value
+        self.assertTrue(level == 3)
+
+    def test_boundary1(self):
+        self.user = User.objects.create_user(username='testuser', password='1234')
+        charity = Charity(name="Charity Name", desc="Charity Description")
+        charity.save()
+        MoneyDonation(user=self.user, date_donated=timezone.now(), money_total=9.99, charity=charity).save()
+        views.update_level(self.user)
+        level = Level.objects.filter(user=self.user).first().value
+        self.assertTrue(level == 1)
+
+    def test_boundary2(self):
+        self.user = User.objects.create_user(username='testuser', password='1234')
+        charity = Charity(name="Charity Name", desc="Charity Description")
+        charity.save()
+        MoneyDonation(user=self.user, date_donated=timezone.now(), money_total=10.00, charity=charity).save()
+        views.update_level(self.user)
+        level = Level.objects.filter(user=self.user).first().value
+        self.assertTrue(level == 2)
+
+    def test_boundary3(self):
+        self.user = User.objects.create_user(username='testuser', password='1234')
+        task = Task(name="Task Name", desc="Task Description", goal=60)
+        task.save()
+        TimeDonation(user=self.user, date_donated=timezone.now(), time_total=29, task=task).save()
+        views.update_level(self.user)
+        level = Level.objects.filter(user=self.user).first().value
+        self.assertTrue(level == 1)
+
+    def test_boundary4(self):
+        self.user = User.objects.create_user(username='testuser', password='1234')
+        task = Task(name="Task Name", desc="Task Description", goal=60)
+        task.save()
+        TimeDonation(user=self.user, date_donated=timezone.now(), time_total=30, task=task).save()
+        views.update_level(self.user)
+        level = Level.objects.filter(user=self.user).first().value
+        self.assertTrue(level == 2)
+
+class ProcessSplitsTests(TestCase):
     def test_equivalence1(self):
         splits, sum = views.process_splits('1.00')
         self.assertFalse(splits[0] > 1.00 or splits[0] < 1.00)
