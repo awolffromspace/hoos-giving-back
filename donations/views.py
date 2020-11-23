@@ -174,15 +174,13 @@ def pay(request):
                 )
 
         charities = Charity.objects.all()
-        splits = processSplits(request.session['donation_splits'])
-        if splits[0] > -1:
-            index = 0
-            for charity in charities:
-                split = splits[index]
-                if split > 0.00:
-                    MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charity).save()
-                index += 1
-            updateLevel(request.user)
+        index = 0
+        for charity in charities:
+            split = splits[index]
+            if split > 0.00:
+                MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charity).save()
+            index += 1
+        updateLevel(request.user)
 
         return HttpResponseRedirect('/donations/')
 
