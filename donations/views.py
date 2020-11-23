@@ -1,3 +1,20 @@
+# /***************************************************************************************
+# *  REFERENCES
+# *  Title: Django Stripe Payments Simplified With Donation Page
+# *  Author: Dennis Ivy
+# *  Date: 3/13/20
+# *  Code version: N/A
+# *  URL: https://www.youtube.com/watch?v=oZwyA9lUwRk
+# *  Software License: N/A
+# *
+# *  Title: Stripe API Reference
+# *  Author: N/A
+# *  Date: N/A
+# *  Code version: N/A
+# *  URL: https://stripe.com/docs/api
+# *  Software License: N/A
+# ***************************************************************************************/
+
 import datetime
 import stripe
 

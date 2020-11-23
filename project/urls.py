@@ -1,3 +1,13 @@
+# /***************************************************************************************
+# *  REFERENCES
+# *  Title: In 5 Mins: Set up Google Login to Sign up Users on Django
+# *  Author: Zoe Chew
+# *  Date: 7/27/19
+# *  Code version: N/A
+# *  URL: https://whizzoe.medium.com/in-5-mins-set-up-google-login-to-sign-up-users-on-django-e71d5c38f5d5
+# *  Software License: N/A
+# ***************************************************************************************/
+
 """project URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
