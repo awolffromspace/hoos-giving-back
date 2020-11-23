@@ -23,10 +23,6 @@
 {% if user.is_authenticated %}
 <h1>Payment</h1>
 
-
-<script src="https://js.stripe.com/v3/"></script>
-
-
 <form action="" method="post" id="payment-form">
 	{% csrf_token %}
   <div class="form-row">
@@ -43,6 +39,8 @@
 
   <button>Complete donation</button>
 </form>
+
+<script src="https://js.stripe.com/v3/"></script>
 
 <script>
 // Create a Stripe client.
