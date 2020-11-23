@@ -101,6 +101,7 @@
         charity = "charity" + index.toString();
       }
       document.cookie = "donation_total=" + money_total.toString() + ";domain=.project-1-34.herokuapp.com;path=/";
+      document.cookie = "donation_splits=" + money_splits + ";domain=.project-1-34.herokuapp.com;path=/";
       document.getElementById('id_money_splits').value = money_splits;
     }
 

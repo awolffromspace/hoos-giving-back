@@ -93,18 +93,6 @@ def donate(request):
     if request.method == 'POST':
         form = MoneyDonationForm(request.POST)
         if form.is_valid():
-            splits = processSplits(form.cleaned_data['money_splits'])
-            if splits[0] > -1:
-                index = 0
-                for charity in charities:
-                    split = splits[index]
-                    if split > 0.00:
-                        MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charity).save()
-                    index += 1
-                updateLevel(request.user)
-            else:
-                form = MoneyDonationForm()
-                render(request, 'donations/donate.html', {'form': form})
             return HttpResponseRedirect('/donations/pay/')
     else:
         form = MoneyDonationForm()
@@ -177,6 +165,17 @@ def pay(request):
                 currency = "usd",
                 description = "Donation"
                 )
+
+        charities = Charity.objects.all()
+        splits = processSplits(request.COOKIES['donation_splits'])
+        if splits[0] > -1:
+            index = 0
+            for charity in charities:
+                split = splits[index]
+                if split > 0.00:
+                    MoneyDonation(user=request.user, date_donated=timezone.now(), money_total=split, charity=charity).save()
+                index += 1
+            updateLevel(request.user)
 
         return HttpResponseRedirect('/donations/')
 
