@@ -60,7 +60,7 @@ def process_splits(splits_str):
         except ValueError:
             return [-1], sum
     if sum < 0.01 or sum > 999999999.99:
-        return [-1]
+        return [-1], sum
     return splits, sum
 
 def update_level(user):
