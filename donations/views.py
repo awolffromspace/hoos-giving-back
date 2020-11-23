@@ -108,7 +108,7 @@ def volunteer(request):
     if request.method == 'POST':
         form = TimeDonationForm(request.POST)
         if form.is_valid():
-            splits = process_splits(form.cleaned_data['time_splits'])
+            splits, sum = process_splits(form.cleaned_data['time_splits'])
             if splits[0] > -1:
                 index = 0
                 for task in tasks:
