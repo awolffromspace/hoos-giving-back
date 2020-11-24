@@ -109,8 +109,8 @@ class ProcessSplitsTests(TestCase):
         self.assertFalse(splits[2] > 3.00 or splits[2] < 3.00)
 
     def test_boundary1(self):
-        splits, sum = views.process_splits('0.01')
-        self.assertFalse(splits[0] > 0.01 or splits[0] < 0.01)
+        splits, sum = views.process_splits('0.50')
+        self.assertFalse(splits[0] > 0.50 or splits[0] < 0.50)
 
     def test_boundary2(self):
         splits, sum = views.process_splits('999999999.99')
@@ -126,13 +126,17 @@ class ProcessSplitsTests(TestCase):
         self.assertTrue(splits[0] == -1)
 
     def test_exception2(self):
-        splits, sum = views.process_splits('1000000000.00')
+        splits, sum = views.process_splits('0.49')
         self.assertTrue(splits[0] == -1)
 
     def test_exception3(self):
-        splits, sum = views.process_splits('-1.00')
+        splits, sum = views.process_splits('1000000000.00')
         self.assertTrue(splits[0] == -1)
 
     def test_exception4(self):
+        splits, sum = views.process_splits('-1.00')
+        self.assertTrue(splits[0] == -1)
+
+    def test_exception5(self):
         splits, sum = views.process_splits('text')
         self.assertTrue(splits[0] == -1)

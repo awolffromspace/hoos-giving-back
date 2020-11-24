@@ -59,7 +59,7 @@ def process_splits(splits_str):
             sum += split
         except ValueError:
             return [-1], sum
-    if sum < 0.01 or sum > 999999999.99:
+    if sum < 0.50 or sum > 999999999.99:
         return [-1], sum
     return splits, sum
 
@@ -114,14 +114,15 @@ def volunteer(request):
                 for task in tasks:
                     split = splits[index]
                     if split > 0.00:
+                        updated_goal = task.goal - split
+                        if (updated_goal <= 0):
+                            updated_goal = 0
+                            task.fulfilled = True
+                            split = task.goal
+                        task.goal = updated_goal
+                        task.save()
                         TimeDonation(user=request.user, date_donated=timezone.now(), time_total=split, task=task).save()
                     index += 1
-                    updated_goal = task.goal - split
-                    if (updated_goal <= 0):
-                        updated_goal = 0
-                        task.fulfilled = True
-                    task.goal = updated_goal
-                    task.save()
                 update_level(request.user)
                 return HttpResponseRedirect('/donations/')
             else:
@@ -149,7 +150,7 @@ def pay(request):
     amount = 0
     if 'donation_total' in request.session and 'donation_splits' in request.session:
         amount = int(float(request.session['donation_total']) * 100)
-        if amount <= 0:
+        if amount < 0.50:
             return render(request, 'donations/pay.html')
     else:
         return render(request, 'donations/pay.html')
