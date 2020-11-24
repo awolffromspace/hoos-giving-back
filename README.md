@@ -1,6 +1,6 @@
 # Hoos Giving Back: Project-1-34
 
-A micro-donations and micro-volunteering web application where users can donate to multiple charities, volunteer to perform requested tasks, and view others' donations and volunteering through a feed. Users level up for each donation of $10 or each volunteered time of 30 minutes.
+A micro-donations and micro-volunteering web application where users can donate to multiple charities, volunteer to perform requested tasks, and view others' donations and volunteering through a feed. Users level up with each donation of $10 or each volunteered time of 30 minutes.
 
 Link: https://project-1-34.herokuapp.com
 
