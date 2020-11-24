@@ -6,7 +6,7 @@ Link: https://project-1-34.herokuapp.com
 
 ## Donations
 
-On the donate page, move the sliders to specify the amount of money to donate for each charity. While the maximum value for the slider is only $100 to improve the accuracy of the slider, higher values can be submitted in the input boxes. After submitting, the Stripe API will ask for credit card information, which can be filled in with a test credit card by repeatedly typing "42" over and over.
+On the donate page, move the sliders to specify the amount of money to donate for each charity. While the maximum slider value is only $100 to make it accurate enough to select small values, higher values can be submitted in the input boxes. After submitting, the Stripe API will ask for credit card information, which can be filled in with a test credit card by repeatedly typing "42" over and over.
 
 ## Volunteering
 
