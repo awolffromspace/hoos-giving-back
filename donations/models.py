@@ -25,7 +25,7 @@ class Task(models.Model):
 
     def __str__(self):
         return '{0}\'s task {1} has a goal of {2} minutes'.format(
-            self.user.first_name,
+            self.user.username,
             self.name,
             self.goal
         )
@@ -48,7 +48,7 @@ class MoneyDonation(Donation):
         level = Level.objects.filter(user=self.user).first().value
         return 'Level {0} user {1} donated ${2} to {3} at {4}'.format(
             level,
-            self.user.first_name,
+            self.user.username,
             self.money_total,
             self.charity.name,
             self.date_donated.astimezone(pytz.timezone('US/Eastern')).strftime('%I:%M %p on %b %d %y')
@@ -62,10 +62,10 @@ class TimeDonation(Donation):
         level = Level.objects.filter(user=self.user).first().value
         return 'Level {0} user {1} volunteered {2} minutes to do {3} for user {4} at {5}'.format(
             level,
-            self.user.first_name,
+            self.user.username,
             self.time_total,
             self.task.name,
-            self.task.user.first_name,
+            self.task.user.username,
             self.date_donated.astimezone(pytz.timezone('US/Eastern')).strftime('%I:%M %p on %b %d %y')
         )
 
@@ -79,6 +79,6 @@ class Level(models.Model):
 
     def __str__(self):
         return '{0} is level {1}'.format(
-            self.user.first_name,
+            self.user.username,
             self.value
         )
