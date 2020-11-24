@@ -163,7 +163,7 @@ def pay(request):
                 amount = amount,
                 currency = "usd",
                 description = "Donation"
-                )
+            )
 
         charities = Charity.objects.all()
         splits = request.session['donation_splits']
@@ -178,3 +178,4 @@ def pay(request):
         return HttpResponseRedirect('/donations/')
 
     return render(request, 'donations/pay.html')
+
