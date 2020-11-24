@@ -8,18 +8,24 @@ class Charity(models.Model):
     desc = models.CharField(max_length=500, default='')
 
     def __str__(self):
-        return "{0}".format(
+        return '{0}'.format(
             self.name
         )
 
 class Task(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null=True
+    )
     name = models.CharField(max_length=50, default='')
     desc = models.CharField(max_length=500, default='')
     goal = models.IntegerField(default=0)
     fulfilled = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{0} has a goal of {1} minutes".format(
+        return '{0}\'s task {1} has a goal of {2} minutes'.format(
+            self.user.first_name,
             self.name,
             self.goal
         )
@@ -40,12 +46,12 @@ class MoneyDonation(Donation):
 
     def __str__(self):
         level = Level.objects.filter(user=self.user).first().value
-        return "Level {0} user {1} donated ${2} to {3} at {4}".format(
+        return 'Level {0} user {1} donated ${2} to {3} at {4}'.format(
             level,
-            self.user.username,
+            self.user.first_name,
             self.money_total,
             self.charity.name,
-            self.date_donated.astimezone(pytz.timezone('US/Eastern')).strftime("%I:%M %p on %b %d %y")
+            self.date_donated.astimezone(pytz.timezone('US/Eastern')).strftime('%I:%M %p on %b %d %y')
         )
 
 class TimeDonation(Donation):
@@ -54,12 +60,13 @@ class TimeDonation(Donation):
 
     def __str__(self):
         level = Level.objects.filter(user=self.user).first().value
-        return "Level {0} user {1} volunteered {2} minutes to do {3} at {4}".format(
+        return 'Level {0} user {1} volunteered {2} minutes to do {3} for user {4} at {5}'.format(
             level,
-            self.user.username,
+            self.user.first_name,
             self.time_total,
             self.task.name,
-            self.date_donated.astimezone(pytz.timezone('US/Eastern')).strftime("%I:%M %p on %b %d %y")
+            self.task.user.first_name,
+            self.date_donated.astimezone(pytz.timezone('US/Eastern')).strftime('%I:%M %p on %b %d %y')
         )
 
 class Level(models.Model):
@@ -71,7 +78,7 @@ class Level(models.Model):
     value = models.IntegerField(default=1)
 
     def __str__(self):
-        return "{0} is level {1}".format(
-            self.user.username,
+        return '{0} is level {1}'.format(
+            self.user.first_name,
             self.value
         )

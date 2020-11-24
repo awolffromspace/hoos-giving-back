@@ -27,7 +27,7 @@ from operator import attrgetter
 from .forms import MoneyDonationForm, TimeDonationForm, TaskForm
 from .models import Charity, Task, MoneyDonation, TimeDonation, Level
 
-stripe.api_key = "sk_test_51Hmsn6A6a6h8LgDy02KZ3YjlftIk89TbokiSyGJ2GPGZ6LUN4bFFnpBMa2ONGXwH4U09yxy4KIdpd9G6MF7ATWkh007YmN3paT"
+stripe.api_key = 'sk_test_51Hmsn6A6a6h8LgDy02KZ3YjlftIk89TbokiSyGJ2GPGZ6LUN4bFFnpBMa2ONGXwH4U09yxy4KIdpd9G6MF7ATWkh007YmN3paT'
 
 class IndexView(generic.ListView):
     template_name = 'donations/index.html'
@@ -138,7 +138,7 @@ def submit_task(request):
         if form.is_valid():
             try:
                 goal = int(form.cleaned_data['goal'])
-                Task(name=form.cleaned_data['name'], desc=form.cleaned_data['desc'], goal=goal).save()
+                Task(user=request.user, name=form.cleaned_data['name'], desc=form.cleaned_data['desc'], goal=goal).save()
                 return HttpResponseRedirect('/donations/volunteer/')
             except:
                 return render(request, 'donations/task.html', {'form': form})
@@ -157,7 +157,7 @@ def pay(request):
     
     if request.method == 'POST':
         customer = stripe.Customer.create(
-            name=request.user.first_name + " " + request.user.last_name,
+            name=request.user.first_name + ' ' + request.user.last_name,
             email=request.user.email,
             source=request.POST['stripeToken']
         )
@@ -165,8 +165,8 @@ def pay(request):
         charge = stripe.Charge.create(
             customer=customer,
             amount=amount,
-            currency="usd",
-            description="Donation"
+            currency='usd',
+            description='Donation'
         )
 
         charities = Charity.objects.all()
