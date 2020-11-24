@@ -147,8 +147,12 @@ def submit_task(request):
 
 def pay(request):
     amount = 0
-    if 'donation_total' in request.COOKIES:
+    if 'donation_total' in request.session and 'donation_splits' in request.session:
         amount = int(float(request.session['donation_total']) * 100)
+        if amount <= 0:
+            return render(request, 'donations/pay.html')
+    else:
+        return render(request, 'donations/pay.html')
     
     if request.method == 'POST':
         customer = stripe.Customer.create(
