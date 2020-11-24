@@ -151,19 +151,18 @@ def pay(request):
         amount = int(float(request.session['donation_total']) * 100)
     
     if request.method == 'POST':
-        
         customer = stripe.Customer.create(
-                name=request.user.first_name + " " + request.user.last_name,
-                email=request.user.email,
-                source=request.POST['stripeToken']
-            )
+            name=request.user.first_name + " " + request.user.last_name,
+            email=request.user.email,
+            source=request.POST['stripeToken']
+        )
 
         charge = stripe.Charge.create(
-                customer=customer,
-                amount = amount,
-                currency = "usd",
-                description = "Donation"
-            )
+            customer=customer,
+            amount=amount,
+            currency="usd",
+            description="Donation"
+        )
 
         charities = Charity.objects.all()
         splits = request.session['donation_splits']
@@ -178,4 +177,3 @@ def pay(request):
         return HttpResponseRedirect('/donations/')
 
     return render(request, 'donations/pay.html')
-
