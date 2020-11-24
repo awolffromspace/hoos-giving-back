@@ -112,8 +112,8 @@ def volunteer(request):
             if splits[0] > -1:
                 index = 0
                 for task in tasks:
-                    split = splits[index]
-                    if split > 0.00:
+                    split = int(splits[index])
+                    if split > 0:
                         updated_goal = task.goal - split
                         if (updated_goal <= 0):
                             updated_goal = 0
