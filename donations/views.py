@@ -146,22 +146,6 @@ def submit_task(request):
     return render(request, 'donations/task.html', {'form': form})
 
 def pay(request):
-
-    '''
-    How to fix me:
-    - Need to somehow take in donation amount from last page
-        -This needs to be an int, in penies. Replace the value assigned to amount in charge.
-
-    - Need to have a name/email for customer (a string)... unsure how to get it using google login
-        -these variables are found in customer
-
-    - The donation should not be recorded on the app until after payment is given
-        - somehow this view probably needs to be passed the information on the charge and finalize it;
-          this probably should be done after the charge var because then the payment should have gone through
-        - and it might look a bit nicer if we can show a little info at the checkout page, too. Like at least the amount
-    '''
-
-
     amount = 0
     if 'donation_total' in request.COOKIES:
         amount = int(float(request.session['donation_total']) * 100)
