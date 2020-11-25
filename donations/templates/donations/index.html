@@ -6,9 +6,9 @@
 <div class="wrapper">
   {% if user.is_authenticated %}
     {% if donation_list %}
-      <ul>
+      <ul style = "list-style: none; padding-top: 16px; padding-left: 48px; font-family: Helvetica;">
         {% for donation in donation_list %}
-          <li>{{ donation }}</li>
+          <li style = "color: #565554;letter-spacing: .25px">{{ donation }}</li>
         {% endfor %}
       </ul>
     {% else %}
