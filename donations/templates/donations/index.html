@@ -11,6 +11,27 @@
           <li style = "border-style: solid; border-color: #EF476F; border-width: 2px; border-radius: 40px; font-weight: bold; color: white;letter-spacing: .25px; padding-left: 15px; padding-bottom: 8px; margin-bottom: 12px; padding-top: 8px; margin-right: 64px; background-color: #EF476F;">{{ donation }}</li>
         {% endfor %}
       </ul>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+      <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var colors = ["#EF476F", "#1B9AAA", "#FFC43D", "#06D6A0", "#EECFAE"];
+      var index = 0;
+      var arrayIndex = 0;
+      let listItems = document.querySelectorAll('#myul li');
+      while (listItems !== null) {
+        listItems[index].style.backgroundColor = colors[arrayIndex];
+        listItems[index].style.borderColor = colors[arrayIndex];
+        index++;
+        if (arrayIndex < 4) {
+          arrayIndex++;
+        } else {
+          arrayIndex = 0;
+        }
+      }
+
+    }, false);
+    </script>
     {% else %}
       <center style = "font-family: Helvetica; font-style: normal; font-weight: bold; color: #565554; margin-top: 250px">you haven't donated or volunteered yet! explore our nonprofits to get started</center>
     {% endif %}
