@@ -46,7 +46,7 @@ class MoneyDonation(Donation):
 
     def __str__(self):
         level = Level.objects.filter(user=self.user).first().value
-        return 'Level {0} user {1} donated ${2} to {3} at {4}'.format(
+        return 'level {0} user {1} donated ${2} to {3} at {4}'.format(
             level,
             self.user.username,
             self.money_total,
@@ -60,7 +60,7 @@ class TimeDonation(Donation):
 
     def __str__(self):
         level = Level.objects.filter(user=self.user).first().value
-        return 'Level {0} user {1} volunteered {2} minutes to do {3} for user {4} at {5}'.format(
+        return 'level {0} user {1} volunteered {2} minutes to do {3} for user {4} at {5}'.format(
             level,
             self.user.username,
             self.time_total,
