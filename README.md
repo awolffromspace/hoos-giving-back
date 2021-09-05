@@ -14,14 +14,14 @@ Just like donations, the volunteer page has sliders to set how many minutes to v
 
 ## Screenshots
 
-![front page](https://github.com/awolffromspace/hoos-giving-back/blob/master/front_page.png?raw=true)
+![front page](https://github.com/awolffromspace/hoos-giving-back/blob/master/screenshots/front_page.png?raw=true)
 
-![donate](https://github.com/awolffromspace/hoos-giving-back/blob/master/donate.png?raw=true)
+![donate](https://github.com/awolffromspace/hoos-giving-back/blob/master/screenshots/donate.png?raw=true)
 
-![credit card API](https://github.com/awolffromspace/hoos-giving-back/blob/master/credit_card_api.png?raw=true)
+![credit card API](https://github.com/awolffromspace/hoos-giving-back/blob/master/screenshots/credit_card_api.png?raw=true)
 
-![feed](https://github.com/awolffromspace/hoos-giving-back/blob/master/feed.png?raw=true)
+![feed](https://github.com/awolffromspace/hoos-giving-back/blob/master/screenshots/feed.png?raw=true)
 
-![volunteer](https://github.com/awolffromspace/hoos-giving-back/blob/master/volunteer.png?raw=true)
+![volunteer](https://github.com/awolffromspace/hoos-giving-back/blob/master/screenshots/volunteer.png?raw=true)
 
-![task submission](https://github.com/awolffromspace/hoos-giving-back/blob/master/task_submission.png?raw=true)
+![task submission](https://github.com/awolffromspace/hoos-giving-back/blob/master/screenshots/task_submission.png?raw=true)
