@@ -11,3 +11,17 @@ On the donate page, move the sliders to specify the amount of money to donate fo
 ## Volunteering
 
 Just like donations, the volunteer page has sliders to set how many minutes to volunteer for each task. However, each task has a goal amount, which is the total amount of minutes requested by the task submitter. Each time a user volunteers to perform a task, that task's goal will be reduced by however much time the user volunteered for. Once the goal is met, the task will be hidden from view, indicating that the task is complete. Additionally, users can submit new tasks by clicking on "Submit a new task!"
+
+## Screenshots
+
+![front page](https://github.com/awolffromspace/hoos-giving-back/blob/master/front_page.png?raw=true)
+
+![donate](https://github.com/awolffromspace/hoos-giving-back/blob/master/donate.png?raw=true)
+
+![credit card API](https://github.com/awolffromspace/hoos-giving-back/blob/master/credit_card_api.png?raw=true)
+
+![feed](https://github.com/awolffromspace/hoos-giving-back/blob/master/feed.png?raw=true)
+
+![volunteer](https://github.com/awolffromspace/hoos-giving-back/blob/master/volunteer.png?raw=true)
+
+![task submission](https://github.com/awolffromspace/hoos-giving-back/blob/master/task_submission.png?raw=true)
